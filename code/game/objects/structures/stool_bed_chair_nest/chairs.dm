@@ -248,9 +248,9 @@
 			var/mob/living/buckled_mob = m
 			unbuckle_mob(buckled_mob)
 			buckled_mob.throw_at(A, 3, propelled)
-			victim.apply_effect(120, STUN, 0)
-			victim.apply_effect(120, KNOCKDOWN, 0)
-			victim.apply_effect(6, STUTTER, 0)
+			buckled_mob.apply_effect(120, STUN, 0)
+			buckled_mob.apply_effect(120, KNOCKDOWN, 0)
+			buckled_mob.apply_effect(6, STUTTER, 0)
 			buckled_mob.take_organ_damage(10)
 			playsound(loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
 			buckled_mob.visible_message("<span class='danger'>[buckled_mob] crashed into [A]!</span>")

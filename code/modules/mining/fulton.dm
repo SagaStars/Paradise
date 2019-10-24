@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			var/mutable_appearance/balloon3
 			if(isliving(A))
 				var/mob/living/M = A
-				M.Weaken(16) // Keep them from moving during the duration of the extraction
+				M.Paralyze(320) // Keep them from moving during the duration of the extraction
 				M.buckled = 0 // Unbuckle them to prevent anchoring problems
 			else
 				A.anchored = TRUE
@@ -109,7 +109,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			animate(holder_obj, pixel_z = 1000, time = 30)
 			if(ishuman(A))
 				var/mob/living/carbon/human/L = A
-				L.SetParalysis(0)
+				L.SetParalyzed(0)
 				L.drowsyness = 0
 				L.SetSleeping(0)
 			sleep(30)

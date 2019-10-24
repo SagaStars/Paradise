@@ -353,7 +353,7 @@
 		if(H.mind && H.mind.vampire && !H.mind.vampire.get_ability(/datum/vampire_passive/full)) //incapacitating but not lethal.
 			if(prob(min(25, current_cycle)))
 				to_chat(H, "<span class='danger'>You can't get the scent of garlic out of your nose! You can barely think...</span>")
-				H.Weaken(1)
+				H.Paralyze(20)
 				H.Jitter(10)
 				H.fakevomit()
 		else
@@ -841,9 +841,9 @@
 /datum/reagent/questionmark/reaction_mob(mob/living/carbon/human/H, method = TOUCH, volume)
 	if(istype(H) && method == INGEST)
 		if(H.dna.species.taste_sensitivity < TASTE_SENSITIVITY_NO_TASTE) // If you can taste it, then you know how awful it is.
-			M.Stun(40, FALSE)
-			M.Paralyze(40, FALSE)
-			M.update_mobility()
+			H.Stun(40, FALSE)
+			H.Paralyze(40, FALSE)
+			H.update_mobility()
 			to_chat(H, "<span class='danger'>Ugh! Eating that was a terrible idea!</span>")
 		if(NO_HUNGER in H.dna.species.species_traits) //If you don't eat, then you can't get food poisoning
 			return

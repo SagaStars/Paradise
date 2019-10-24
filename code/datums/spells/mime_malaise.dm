@@ -32,8 +32,8 @@
 	..()
 
 /mob/living/carbon/human/proc/mimetouched()
-	Weaken(7)
-	Stun(7)
+	Paralyze(140)
+	Stun(140)
 	if(iswizard(src) || (mind && mind.special_role == SPECIAL_ROLE_WIZARD_APPRENTICE)) //Wizards get non-cursed mime outfit. Replace with mime robes if we add those.
 		unEquip(wear_mask, TRUE)
 		unEquip(w_uniform, TRUE)

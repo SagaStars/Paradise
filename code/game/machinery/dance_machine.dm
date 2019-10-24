@@ -472,8 +472,10 @@
 				if(!L || !L.client)
 					continue
 				L.stop_sound_channel(CHANNEL_JUKEBOX)
-			else if(prob(9) && (L.mobility_flags & MOBILITY_MOVE) && isliving(L))
-				dance(L)
+			if(isliving(L))
+				var/mob/living/D = L
+				if(prob(9) && (D.mobility_flags & MOBILITY_MOVE))
+					dance(D)
 	else if(active)
 		active = FALSE
 		STOP_PROCESSING(SSobj, src)

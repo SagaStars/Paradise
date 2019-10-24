@@ -125,6 +125,21 @@
 	// Bitfields
 	var/disabilities = 0
 
+
+/mob/living/proc/StartResting(updating = 1)
+	var/val_change = !resting
+	resting = TRUE
+
+	if(updating && val_change)
+		update_mobility()
+
+/mob/living/proc/StopResting(updating = 1)
+	var/val_change = !!resting
+	resting = FALSE
+
+	if(updating && val_change)
+		update_mobility()
+
 /mob/living/proc/StartFlying()
 	var/val_change = !flying
 	flying = TRUE

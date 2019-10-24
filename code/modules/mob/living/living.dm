@@ -477,14 +477,14 @@
 	return
 
 /mob/living/proc/remove_CC(should_update_canmove = TRUE)
-	SetWeakened(0, FALSE)
-	SetStunned(0, FALSE)
-	SetParalysis(0, FALSE)
+	SetKnockdown(0, FALSE)
+	SetStun(0, FALSE)
+	SetUnconscious(0, FALSE)
 	SetSleeping(0, FALSE)
 	setStaminaLoss(0)
 	SetSlowed(0)
 	if(should_update_canmove)
-		update_canmove()
+		update_mobility()
 
 /mob/living/proc/UpdateDamageIcon()
 	return

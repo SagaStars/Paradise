@@ -202,7 +202,7 @@
 
 ////////////////////////////Proc for moving soul in and out off stone//////////////////////////////////////
 
-/obj/item/proc/transfer_soul(var/choice as text, var/target, var/mob/U as mob)
+/obj/item/proc/transfer_soul(var/choice, var/target, var/mob/U)
 	switch(choice)
 		if("FORCE")
 			var/obj/item/soulstone/C = src
@@ -244,7 +244,7 @@
 			var/mob/living/simple_animal/shade/T = target
 			var/obj/item/soulstone/C = src
 			if(!C.can_use(U))
-				U.Paralyse(5)
+				U.Paralyze(100)
 				to_chat(U, "<span class='userdanger'>Your body is wracked with debilitating pain!</span>")
 				return
 			if(T.stat == DEAD)

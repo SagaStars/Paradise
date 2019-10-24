@@ -75,7 +75,7 @@
 	var/paralyzed = IsParalyzed()
 	var/stun = IsStun()
 	var/knockdown = IsKnockdown()
-	var/canmove = !IsImmobilized() && !stun && && !isFrozen() conscious && !paralyzed && !buckled && !chokehold && (has_arms || has_legs)
+	var/canmove = !IsImmobilized() && !stun && !IsFrozen() && conscious && !paralyzed && !buckled && !chokehold && (has_arms || has_legs)
 	if(canmove)
 		mobility_flags |= MOBILITY_MOVE
 	else

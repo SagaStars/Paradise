@@ -42,6 +42,8 @@
 
 /datum/status_effect/incapacitating/sleeping/tick()
 	var/comfort = 1
+	if(carbon_owner)
+		carbon_owner.handle_dreams()
 	if(owner.staminaloss)
 		owner.adjustStaminaLoss(-10)
 	if(istype(owner.buckled, /obj/structure/bed))
@@ -58,11 +60,8 @@
 	if(comfort > 1 && prob(3))//You don't heal if you're just sleeping on the floor without a blanket.
 		owner.adjustBruteLoss(-1*comfort)
 		owner.adjustFireLoss(-1*comfort)
-	if(prob(20))
-		if(carbon_owner)
-			carbon_owner.handle_dreams()
-		if(prob(10) && owner.health > HEALTH_THRESHOLD_CRIT)
-			owner.emote("snore")
+	if(prob(10) && owner.health > HEALTH_THRESHOLD_CRIT)
+		owner.emote("snore")
 	// Keep SSD people asleep
 	if(owner.player_logged)
 		owner.AdjustSleeping(40)
