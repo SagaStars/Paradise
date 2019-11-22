@@ -1,11 +1,12 @@
 /datum/reagent/medicine/moa_complement
-	name = "Oxygen"
+	name = "CentComm certified oxygen"
 	id = "moa_complement"
 	reagent_state = LIQUID
 	heart_rate_decrease = 1
 	can_synth = FALSE
-	taste_description = "a safe refuge"
+	taste_description = "a mint leaf"
 
 /datum/reagent/medicine/moa_complement/on_mob_life(mob/living/M)
 		var/update_flags = STATUS_UPDATE_NONE
 		update_flags |= M.adjustOxyLoss(-16, FALSE)
+		return ..() | update_flags

@@ -1,6 +1,3 @@
-#define IV_DRAW 0
-#define IV_INJECT 1
-
 /obj/item/reagent_containers/moa
 	name = "m.o.a"
 	desc = "(Medbay Oxygen Asissistant) A oxigen assistant that will be sending oxygen to the pacient over a period of time."
@@ -13,7 +10,6 @@
 	var/status = 3
 	var/hitcost = 64
 	var/obj/item/stock_parts/cell/cell = null
-	var/mode = IV_INJECT
 	var/mob/living/carbon/human/injection_target
 
 /obj/item/reagent_containers/moa/process()
@@ -104,8 +100,9 @@
 
 /obj/item/reagent_containers/moa/emp_act(severity)
 	if(cell)
-		deductcharge(100000 / severity)
+		cell = null
 		playsound(loc, "sparks", 75, 1, -1)
+		status = 3
 		update_icon()
 	..()
 
