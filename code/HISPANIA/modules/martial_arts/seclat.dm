@@ -41,12 +41,12 @@
 		if("heart_boom")
 			streak = ""
 			heart_boom(A,D)
-			return 1
+			return TRUE
 		if("advanced_neck_chop")
 			streak = ""
 			advanced_neck_chop(A,D)
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /datum/martial_art/seclat/proc/heart_boom(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 	D.visible_message("<span class='warning'>[A] punches [D]'s in the chest in a spinning fashion!</span>", \
@@ -58,7 +58,7 @@
 	D.AdjustLoseBreath(1)
 	var/atom/throw_target = get_edge_target_turf(D, A.dir)
 	D.throw_at(throw_target, 1, 14, A)
-	return 1
+	return TRUE
 
 /datum/martial_art/seclat/proc/advanced_neck_chop(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 	D.visible_message("<span class='warning'>[A] fiercily chops [D]'s neck with his bare hands!</span>", \
@@ -66,7 +66,7 @@
 	playsound(get_turf(A), 'sound/effects/hit_punch.ogg', 50, 1, -1)
 	D.apply_damage(8, BRUTE, "head")
 	D.AdjustSilence(15)
-	return 1
+	return TRUE
 
 /datum/martial_art/seclat/proc/Suplex(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 
@@ -91,7 +91,7 @@
 		var/obj/item/grab/G = A.get_inactive_hand()
 		if(G.affecting == D)
 			Suplex(A,D)
-			return 1
+			return TRUE
 
 /datum/martial_art/seclat/grab_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 	add_to_streak("G", D)
@@ -104,7 +104,7 @@
 
 /datum/martial_art/seclat/harm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 	if(check_streak(A,D))
-		return 1
+		return TRUE
 	add_attack_logs(A, D, "Melee attacked with [src]")
 	var/picked_hit_type = pick("pivot jabs", "inverse kicks", "throws a flurry of punches at", "backflip kicks")
 	var/bonus_damage = 12.
@@ -125,4 +125,4 @@
 		playsound(get_turf(D), 'sound/effects/hit_punch.ogg', 50, 1, -1)
 	D.visible_message("<span class='danger'>[A] [picked_hit_type] [D]!</span>", \
 					  "<span class='userdanger'>[A] [picked_hit_type] you!</span>")
-	return 1
+	return TRUE
