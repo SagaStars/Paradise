@@ -1,6 +1,7 @@
 /datum/martial_art/seclat
 	name = "Seclat"
-	block_chance = 30 // Tiene alta probabilidad debido a que solo se puede activar cuando esta en modo throw y con un item en la mano, bruh.
+	block_chance = 35 // Tiene alta probabilidad debido a que solo se puede activar cuando esta en modo throw y con un item en la mano, bruh.
+	help_verb = /mob/living/carbon/human/proc/seclat_help
 	var/datum/action/heart_boom/heart_boom = new/datum/action/heart_boom()
 	var/datum/action/advanced_neck_chop/advanced_neck_chop = new/datum/action/advanced_neck_chop()
 
@@ -126,3 +127,15 @@
 	D.visible_message("<span class='danger'>[A] [picked_hit_type] [D]!</span>", \
 					  "<span class='userdanger'>[A] [picked_hit_type] you!</span>")
 	return TRUE
+
+/mob/living/carbon/human/proc/seclat_help()
+	set name = "Remember The Basics"
+	set desc = "You try to remember some of the basics of Seclat."
+	set category = "Seclat"
+	to_chat(usr, "<b><i>You try to remember some of the basics of Seclat.</i></b>")
+
+	to_chat(usr, "<span class='notice'>Heart Break Shot</span>: A powerful corkscrew to the chest, stopping the heart for less than a second. Deals stamina damage and lauches the enemy forward.")
+	to_chat(usr, "<span class='notice'>Suplex</span>: Disarm someone you are grabbing. Suplexes your target to the floor. Greatly injures them and leaves both you and your target on the floor.")
+	to_chat(usr, "<span class='notice'>Advanced Neck Chop</span>: Injures the neck, stopping the victim from speaking for a while. Deals an average amount of damage.")
+
+	to_chat(usr, "<b><i>In addition</span>: Having your throw mode on when being attacked, you enter an active defense mode where you have a chance to block. Also all of your grabs will be aggresive and your standar attacks will be more powerful as well.</i></b>")
