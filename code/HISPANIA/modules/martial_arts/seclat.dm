@@ -6,7 +6,7 @@
 	var/datum/action/advanced_neck_chop/advanced_neck_chop = new/datum/action/advanced_neck_chop()
 
 /datum/action/heart_boom
-	name = "Heart Break Shot - A powerful corkscrew to the chest, stopping the heart for less than a second. Deals stamina damage and lauches the enemy forward"
+	name = "Heart Break Shot - A powerful corkscrew to the chest, stopping the heart for less than a second. Deals stamina damage and launches the enemy forward"
 	button_icon_state = "heart_boom"
 
 /datum/action/heart_boom/Trigger()
@@ -138,4 +138,4 @@
 	to_chat(usr, "<span class='notice'>Suplex</span>: Disarm someone you are grabbing. Suplexes your target to the floor. Greatly injures them and leaves both you and your target on the floor.")
 	to_chat(usr, "<span class='notice'>Advanced Neck Chop</span>: Injures the neck, stopping the victim from speaking for a while. Deals an average amount of damage.")
 
-	to_chat(usr, "<b><i>In addition</span>: Having your throw mode on when being attacked, you enter an active defense mode where you have a chance to block. Also all of your grabs will be aggresive and your standar attacks will be more powerful as well.</i></b>")
+	to_chat(usr, "<b><i>In addition</span>: Having your throw mode on when being attacked, you enter an active defense mode where you have a chance to block. Also all of your grabs will be aggresive and your standard attacks will be more powerful as well.</i></b>")

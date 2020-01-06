@@ -110,8 +110,8 @@ datum/martial_art/krav_maga/grab_act(var/mob/living/carbon/human/A, var/mob/livi
 		return 1
 	..()
 
-/datum/martial_art/krav_maga/harm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D, var/mob/living/carbon/human/H)
-	if(H.mind.assigned_role == "Head of Security") // Tampoco va a adquerir estas mejoras de daño.
+/datum/martial_art/krav_maga/harm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+	if(A.mind.assigned_role == "Head of Security") // Tampoco va a adquerir estas mejoras de daño.
 		return
 	if(check_streak(A,D))
 		return 1
@@ -132,8 +132,8 @@ datum/martial_art/krav_maga/grab_act(var/mob/living/carbon/human/A, var/mob/livi
 					  "<span class='userdanger'>[A] [picked_hit_type] you!</span>")
 	return 1
 
-/datum/martial_art/krav_maga/disarm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D, var/mob/living/carbon/human/H)
-	if(H.mind.assigned_role == "Head of Security") // De este modo el hos no adquiere el 60% de desarme del krav maga.
+/datum/martial_art/krav_maga/disarm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+	if(A.mind.assigned_role == "Head of Security") // De este modo el hos no adquiere el 60% de desarme del krav maga.
 		return
 	if(check_streak(A,D))
 		return 1
