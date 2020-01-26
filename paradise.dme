@@ -1182,7 +1182,6 @@
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\cardboardcham.dm"
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\cargo.dm"
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\engineering.dm"
-#include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\medical.dm"
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\scientist.dm"
 #include "code\HISPANIA\game\objects\structures\crates_lockers\closets\secure\security.dm"
 #include "code\HISPANIA\game\objects\structures\stool_bed_chair_nest\bed.dm"
