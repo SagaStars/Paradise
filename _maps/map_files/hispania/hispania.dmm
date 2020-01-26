@@ -60418,14 +60418,16 @@
 	},
 /area/toxins/server_coldroom)
 "ceJ" = (
-/obj/structure/table,
-/obj/item/reagent_containers/moa/loaded,
-/turf/simulated/floor/plasteel{
-	dir = 2;
-	icon_state = "cafeteria";
-	tag = "icon-cafeteria (NORTHEAST)"
+/obj/structure/shuttle/engine/propulsion/burst{
+	dir = 8
 	},
-/area/medical/medbreak)
+/turf/simulated/floor/plating,
+/turf/simulated/shuttle/wall{
+	tag = "icon-swall_f6";
+	icon_state = "swall_f6";
+	dir = 2
+	},
+/area/shuttle/pod_4)
 "ceK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -61475,8 +61477,8 @@
 	},
 /turf/simulated/floor/plating,
 /turf/simulated/shuttle/wall{
-	tag = "icon-swall_f6";
-	icon_state = "swall_f6";
+	tag = "icon-swall_f5";
+	icon_state = "swall_f5";
 	dir = 2
 	},
 /area/shuttle/pod_4)
@@ -61849,17 +61851,6 @@
 "chf" = (
 /turf/simulated/wall,
 /area/maintenance/asmaint)
-"chg" = (
-/obj/structure/shuttle/engine/propulsion/burst{
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/turf/simulated/shuttle/wall{
-	tag = "icon-swall_f5";
-	icon_state = "swall_f5";
-	dir = 2
-	},
-/area/shuttle/pod_4)
 "chh" = (
 /turf/simulated/wall,
 /area/medical/paramedic)
@@ -65038,6 +65029,15 @@
 /obj/effect/decal/warning_stripes/south,
 /turf/simulated/floor/plasteel/airless,
 /area/toxins/test_area)
+"cmD" = (
+/obj/structure/table,
+/obj/item/reagent_containers/food/drinks/britcup,
+/turf/simulated/floor/plasteel{
+	dir = 2;
+	icon_state = "cafeteria";
+	tag = "icon-cafeteria (NORTHEAST)"
+	},
+/area/medical/medbreak)
 "cmE" = (
 /obj/effect/decal/warning_stripes/southeast,
 /turf/simulated/floor/plasteel/airless,
@@ -129439,9 +129439,9 @@ dfR
 dcq
 dcq
 dcq
-cgx
+ceJ
 doL
-chg
+cgx
 dcq
 aaa
 aaa
@@ -137351,7 +137351,7 @@ cek
 cfU
 chA
 ciW
-ceJ
+cmD
 cli
 cmu
 cnO
