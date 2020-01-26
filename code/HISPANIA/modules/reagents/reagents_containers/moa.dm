@@ -1,9 +1,13 @@
 /obj/item/reagent_containers/moa
-	name = "m.o.a"
+	name = "M.O.A"
 	desc = "(Medbay Oxygen Asissistant) A oxigen assistant that will be sending oxygen to the pacient over a period of time."
 	icon = 'icons/hispania/obj/moa.dmi'
 	icon_state = "moa_shutdown"
+	item_state = "moa"
+	lefthand_file = 'icons/hispania/mob/inhands/items_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/items_righthand.dmi'
 	list_reagents = list("moa_complement" = 10000)
+	origin_tech = "materials=4;biotech=3;engineering=3"
 	volume = 10000
 	w_class = WEIGHT_CLASS_HUGE
 	amount_per_transfer_from_this = 1
@@ -13,16 +17,16 @@
 	var/mob/living/carbon/human/injection_target
 
 /obj/item/reagent_containers/moa/process()
+	if(status == 4)
+		return
 	if(!injection_target)
 		end_processing()
 		return
-
 	if(get_dist(get_turf(src), get_turf(injection_target)) > 1)
 		to_chat(injection_target, "<span class='userdanger'>The [src]'s' needle is ripped out of you!</span>")
 		injection_target.apply_damage(12, BRUTE, pick("head"))
 		end_processing()
 		return
-
 	if(status >= 2)
 		playsound(loc, "sound/machines/buzz-sigh.ogg", 75, 1, -1)
 		return
@@ -36,6 +40,8 @@
 			update_icon()
 
 /obj/item/reagent_containers/moa/attackby(obj/item/W, mob/user, params)
+	if(status == 4)
+		return
 	if(istype(W, /obj/item/stock_parts/cell))
 		var/obj/item/stock_parts/cell/C = W
 		if(cell)
@@ -84,25 +90,29 @@
 	if(status == 1)
 		icon = 'icons/hispania/obj/moa.dmi'
 		icon_state = "moa_active"
-	else if(status == 2)
+	if(status == 2)
 		icon = 'icons/hispania/obj/moa.dmi'
 		icon_state = "moa_nocell"
-	else if(status == 3)
+	if(status == 3)
 		icon = 'icons/hispania/obj/moa.dmi'
 		icon_state = "moa_shutdown"
+	if(status == 4)
+		icon = 'icons/hispania/obj/moa.dmi'
+		icon_state = "moa_broken"
 
 /obj/item/reagent_containers/moa/proc/deductcharge(var/chrgdeductamt)
 	if(cell)
 		if(cell.charge < (hitcost+chrgdeductamt))
 			status = 3
-			playsound(loc, "sparks", 75, 1, -1)
+			playsound(loc, "sound/effects/sparks2.ogg", 75, 1, -1)
 			update_icon()
 
 /obj/item/reagent_containers/moa/emp_act(severity)
 	if(cell)
 		cell = null
-		playsound(loc, "sparks", 75, 1, -1)
-		status = 3
+		playsound(loc, "sound/effects/bang.ogg", 100, 1, -1)
+		status = 4
+		desc = "(Medbay Oxygen Asissistant) Looks like the cell just exploded inside the moa."
 		update_icon()
 	..()
 
@@ -134,6 +144,8 @@
 	return
 
 obj/item/reagent_containers/moa/afterattack(atom/target, mob/user, proximity)
+	if(status == 4)
+		return
 	if(!proximity)
 		return
 	if(!target.reagents)
