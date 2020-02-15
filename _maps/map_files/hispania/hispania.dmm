@@ -296,6 +296,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/item/gun/energy/laser/retro,
 /turf/simulated/shuttle/floor{
 	icon_state = "floor3"
 	},
@@ -361,13 +362,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/shuttle/floor{
-	icon_state = "floor3"
-	},
-/area/shuttle/abandoned)
-"aaX" = (
-/obj/structure/table,
-/obj/item/gun/energy/laser/retro,
 /turf/simulated/shuttle/floor{
 	icon_state = "floor3"
 	},
@@ -49930,6 +49924,20 @@
 /area/hallway/primary/central/se)
 "bOA" = (
 /obj/machinery/computer/account_database,
+/obj/machinery/door_control{
+	id = "hopqueue";
+	name = "HoP Line Shutter";
+	pixel_x = 1;
+	pixel_y = 21;
+	req_access_txt = "57"
+	},
+/obj/machinery/door_control{
+	id = "hop";
+	name = "HoP Office Privacy";
+	pixel_x = 10;
+	pixel_y = 21;
+	req_access_txt = "57"
+	},
 /turf/simulated/floor/plasteel{
 	dir = 9;
 	icon_state = "blue"
@@ -96614,6 +96622,12 @@
 /area/toxins/launch{
 	name = "Toxins Launch Room"
 	})
+"jje" = (
+/mob/living/simple_animal/hostile/carp/megacarp,
+/turf/simulated/shuttle/floor{
+	icon_state = "floor3"
+	},
+/area/shuttle/abandoned)
 "jnJ" = (
 /obj/machinery/light/spot{
 	tag = "icon-tube1 (NORTH)";
@@ -96820,6 +96834,12 @@
 	},
 /turf/simulated/wall,
 /area/crew_quarters/dorms)
+"sJA" = (
+/mob/living/simple_animal/hostile/hivebot/range,
+/turf/simulated/shuttle/floor{
+	icon_state = "floor3"
+	},
+/area/shuttle/abandoned)
 "sUK" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 8
@@ -130170,7 +130190,7 @@ aag
 aai
 aai
 aai
-aaX
+aaG
 abd
 aaG
 aai
@@ -130425,7 +130445,7 @@ aap
 aag
 aai
 aai
-aai
+jje
 aai
 aaz
 abe
@@ -131448,7 +131468,7 @@ aaa
 aaa
 aac
 aai
-aai
+sJA
 aai
 aae
 aaB
@@ -131720,7 +131740,7 @@ aat
 aak
 abu
 aai
-aai
+sJA
 aai
 aai
 aac
@@ -132741,7 +132761,7 @@ aai
 aac
 aaV
 aba
-aai
+sJA
 aaV
 aac
 aai
@@ -134540,7 +134560,7 @@ aap
 aah
 aai
 aai
-aai
+sJA
 aai
 aai
 aaM
@@ -137110,7 +137130,7 @@ aaa
 aaa
 aac
 aai
-aai
+sJA
 aai
 aac
 aaa
