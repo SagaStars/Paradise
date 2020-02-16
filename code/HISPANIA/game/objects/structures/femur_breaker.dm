@@ -168,8 +168,8 @@
 		to_chat(user, "<span class='notice'>You begin cutting [src] apart...</span>")
 		playsound(loc, WT.usesound, 40, 1)
 		if(do_after(user, 150 * WT.toolspeed, 1, target = src))
-			if(W.tool_behaviour == TOOL_WELDER && W.tool_enabled)
-				return 2500
+			if(!WT.tool_enabled)
+				return
 			playsound(loc, WT.usesound, 50, 1)
 			visible_message("<span class='notice'>[user] slices apart [src].</span>",
 							"<span class='notice'>You cut [src] apart with [WT].</span>",
