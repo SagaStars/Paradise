@@ -1,0 +1,188 @@
+/obj/item/reagent_containers/moa
+	name = "M.O.A"
+	desc = "(Medbay Oxygen Asissistant) A oxigen assistant that will be sending oxygen to the pacient over a period of time."
+	icon = 'icons/hispania/obj/moa.dmi'
+	icon_state = "moa_shutdown"
+	item_state = "moa"
+	lefthand_file = 'icons/hispania/mob/inhands/items_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/items_righthand.dmi'
+	list_reagents = list("moa_complement" = 10000)
+	origin_tech = "materials=4;biotech=3;engineering=3"
+	volume = 10000
+	w_class = WEIGHT_CLASS_HUGE
+	amount_per_transfer_from_this = 1
+	var/status = 3
+	var/hitcost = 85
+	var/obj/item/stock_parts/cell/cell = null
+	var/mob/living/carbon/human/injection_target
+
+/obj/item/reagent_containers/moa/process(mob/user)
+	if(status == 4)
+		return
+	if(!injection_target || injection_target.wear_mask)
+		end_processing()
+		return
+	if(get_dist(get_turf(src), get_turf(injection_target)) > 1)
+		to_chat(injection_target, "<span class='userdanger'>The [src] needle is ripped out of you!</span>")
+		injection_target.apply_damage(12, BRUTE, pick("head"))
+		end_processing()
+		return
+	if(status >= 2)
+		if(prob(10))
+			to_chat(viewers(user), "<span class='warning'>WARNING:The [src] has no energy left!</span>")
+		playsound(loc, "sound/machines/buzz-sigh.ogg", 75, 1, -1)
+		update_icon()
+		return
+	else
+		if(reagents.total_volume && status == 1) // Injecting
+			var/fraction = min(amount_per_transfer_from_this/reagents.total_volume, 1) 	//The amount of reagents we'll transfer to the person
+			reagents.reaction(injection_target, INGEST, fraction) 	//React the amount we're transfering.
+			reagents.trans_to(injection_target, amount_per_transfer_from_this)
+			deductcharge(hitcost)
+			cell.use(hitcost)
+			update_icon()
+
+/obj/item/reagent_containers/moa/attackby(obj/item/W, mob/user, params)
+	if(status == 4)
+		return
+	if(istype(W, /obj/item/stock_parts/cell))
+		var/obj/item/stock_parts/cell/C = W
+		if(cell)
+			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
+		else
+			if(C.maxcharge < hitcost)
+				to_chat(user, "<span class='notice'>[src] requires a higher capacity cell.</span>")
+				return
+			if(!user.unEquip(W))
+				return
+			W.loc = src
+			cell = W
+			to_chat(user, "<span class='notice'>You install a cell in [src].</span>")
+			status = 1
+			update_icon()
+
+	else if(istype(W, /obj/item/screwdriver))
+		if(cell)
+			cell.loc = get_turf(src.loc)
+			cell = null
+			to_chat(user, "<span class='notice'>You remove the cell from the [src].</span>")
+			status = 2
+			update_icon()
+			return
+		..()
+	return
+
+/obj/item/reagent_containers/moa/loaded/New() //this one starts with a cell pre-installed.
+	..()
+	status = 1
+	cell = new/obj/item/stock_parts/cell/high(src)
+	update_icon()
+	return
+
+/obj/item/reagent_containers/moa/get_cell()
+	return cell
+
+/obj/item/reagent_containers/moa/examine(mob/user)
+	. = ..()
+	if(cell)
+		. += "<span class='notice'>The M.O.A is [round(cell.percent())]% charged.</span>"
+	if(!cell)
+		. += "<span class='warning'>The M.O.A does not have a power source installed.</span>"
+
+/obj/item/reagent_containers/moa/update_icon()
+	if(status == 1)
+		icon = 'icons/hispania/obj/moa.dmi'
+		icon_state = "moa_active"
+	if(status == 2)
+		icon = 'icons/hispania/obj/moa.dmi'
+		icon_state = "moa_nocell"
+	if(status == 3)
+		icon = 'icons/hispania/obj/moa.dmi'
+		icon_state = "moa_shutdown"
+	if(status == 4)
+		icon = 'icons/hispania/obj/moa.dmi'
+		icon_state = "moa_broken"
+
+/obj/item/reagent_containers/moa/proc/deductcharge(var/chrgdeductamt, mob/user)
+	if(cell)
+		if(cell.charge < (hitcost+chrgdeductamt))
+			status = 3
+			playsound(loc, "sound/effects/sparks2.ogg", 75, 1, -1)
+			to_chat(viewers(user), "<span class='warning'>The [src] has discharged!.</span>")
+			update_icon()
+
+/obj/item/reagent_containers/moa/emp_act(severity)
+	if(cell)
+		cell = null
+		playsound(loc, "sound/effects/bang.ogg", 100, 1, -1)
+		status = 4
+		desc = "(Medbay Oxygen Asissistant) Looks like the cell just exploded inside the moa."
+		update_icon()
+	..()
+
+/obj/item/reagent_containers/moa/Destroy()
+	end_processing()
+	return ..()
+
+/obj/item/reagent_containers/moa/pickup(mob/user)
+	. = ..()
+	update_icon()
+
+/obj/item/reagent_containers/moa/dropped(mob/user)
+	..()
+	update_icon()
+
+/obj/item/reagent_containers/moa/proc/end_processing()
+	injection_target = null
+	STOP_PROCESSING(SSobj, src)
+
+/obj/item/reagent_containers/moa/proc/begin_processing(mob/target)
+	injection_target = target
+	START_PROCESSING(SSobj, src)
+
+/obj/item/reagent_containers/moa/attack_hand()
+	..()
+	update_icon()
+
+/obj/item/reagent_containers/moa/attack(mob/living/M, mob/living/user, def_zone)
+	return
+
+obj/item/reagent_containers/moa/afterattack(atom/target, mob/user, proximity)
+	if(status == 4)
+		return
+	if(!proximity)
+		return
+	if(!target.reagents)
+		return
+
+	if(isliving(target))
+		var/mob/living/L = target
+		if(injection_target) // Removing the needle
+			if(L != injection_target)
+				to_chat(user, "<span class='notice'>[src] is already inserted into [injection_target]'s neck!")
+				return
+			if(L != user)
+				L.visible_message("<span class='danger'>[user] is trying to remove [src]'s needle from [L]'s neck!</span>", \
+								"<span class='userdanger'>[user] is trying to remove [src]'s needle from [L]'s neck!</span>")
+				if(!do_mob(user, L))
+					return
+			L.visible_message("<span class='danger'>[user] removes [src]'s needle from [L]'s neck!</span>", \
+								"<span class='userdanger'>[user] removes [src]'s needle from [L]'s neck!</span>")
+			end_processing()
+		else // Inserting the needle
+			if(L.wear_mask)
+				to_chat(user, "<span class='userdanger'>There's a mask obstrouing the way of the M.O.A!</span!</span>")
+				return
+			if(!L.can_inject(user, 1))
+				return
+			if(amount_per_transfer_from_this > 10) // We only want to be able to transfer 1, 5, or 10 units to people. Higher numbers are for transfering to other containers
+				to_chat(user, "<span class='warning'>The M.O.A can only be used on someone with a transfer amount of 1, 5 or 10.</span>")
+				return
+			if(L != user)
+				L.visible_message("<span class='danger'>[user] is trying to insert [src]'s needle into [L]'s neck!</span>", \
+									"<span class='userdanger'>[user] is trying to insert [src]'s needle into [L]'s neck!</span>")
+				if(!do_mob(user, L))
+					return
+			L.visible_message("<span class='danger'>[user] inserts [src]'s needle into [L]'s neck!</span>", \
+									"<span class='userdanger'>[user] inserts [src]'s needle into [L]'s neck!</span>")
+			begin_processing(L)
