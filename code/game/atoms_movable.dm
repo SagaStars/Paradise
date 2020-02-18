@@ -76,6 +76,9 @@
 				AMob.grabbedby(src)
 			return TRUE
 		stop_pulling()
+
+	SEND_SIGNAL(src, COMSIG_LIVING_START_PULL, AM, state, force)
+
 	if(AM.pulledby)
 		add_attack_logs(AM, AM.pulledby, "pulled from", ATKLOG_ALMOSTALL)
 		AM.pulledby.stop_pulling() //an object can't be pulled by two mobs at once.

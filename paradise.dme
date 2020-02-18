@@ -286,6 +286,7 @@
 #include "code\datums\components\caltrop.dm"
 #include "code\datums\components\decal.dm"
 #include "code\datums\components\ducttape.dm"
+#include "code\datums\components\gunpoint.dm"
 #include "code\datums\components\jestosterone.dm"
 #include "code\datums\components\material_container.dm"
 #include "code\datums\components\paintable.dm"

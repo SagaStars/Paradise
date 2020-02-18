@@ -35,6 +35,7 @@
 	var/semicd = 0						//cooldown handler
 	var/weapon_weight = WEAPON_LIGHT
 	var/list/restricted_species
+	var/pb_knockback = 0
 
 	var/spread = 0
 	var/randomspread = 1
@@ -116,7 +117,6 @@
 /obj/item/gun/proc/shoot_live_shot(mob/living/user as mob|obj, pointblank = 0, mob/pbtarget = null, message = 1)
 	if(recoil)
 		shake_camera(user, recoil + 1, recoil)
-
 	if(suppressed)
 		playsound(user, fire_sound, 10, 1)
 	else
@@ -125,6 +125,9 @@
 			return
 		if(pointblank)
 			user.visible_message("<span class='danger'>[user] fires [src] point blank at [pbtarget]!</span>", "<span class='danger'>You fire [src] point blank at [pbtarget]!</span>", "<span class='italics'>You hear \a [fire_sound_text]!</span>")
+		if(pointblank && pb_knockback > 0)
+			var/atom/throw_target = get_edge_target_turf(pbtarget, user.dir)
+			pbtarget.throw_at(throw_target, pb_knockback, 2)
 		else
 			user.visible_message("<span class='danger'>[user] fires [src]!</span>", "<span class='danger'>You fire [src]!</span>", "You hear \a [fire_sound_text]!")
 
@@ -141,6 +144,12 @@
 		if(!ismob(target) || user.a_intent == INTENT_HARM) //melee attack
 			return
 		if(target == user && user.zone_selected != "mouth") //so we can't shoot ourselves (unless mouth selected)
+			return
+		if(ismob(target) && user.a_intent == INTENT_GRAB)
+			if(user.GetComponent(/datum/component/gunpoint))
+				to_chat(user, "<span class='warning'>You are already holding someone up!</span>")
+				return
+			user.AddComponent(/datum/component/gunpoint, target, src)
 			return
 
 	if(istype(user))//Check if the user can use the gun, if the user isn't alive(turrets) assume it can.
@@ -199,6 +208,9 @@
 	return
 
 /obj/item/gun/proc/process_fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, message = 1, params, zone_override, bonus_spread = 0)
+	if(user)
+		SEND_SIGNAL(user, COMSIG_MOB_FIRED_GUN, user, target, params, zone_override)
+
 	add_fingerprint(user)
 
 	if(semicd)

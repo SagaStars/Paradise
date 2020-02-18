@@ -77,6 +77,10 @@
 
 #define STATUS_EFFECT_HIGHFIVE /datum/status_effect/high_five
 
+#define STATUS_EFFECT_HELDUP /datum/status_effect/heldup // someone is currently pointing a gun at you
+
+#define STATUS_EFFECT_HOLDUP /datum/status_effect/holdup // you are currently pointing a gun at someone
+
 //#define STATUS_EFFECT_SIGILMARK /datum/status_effect/sigil_mark
 
 #define STATUS_EFFECT_CRUSHERDAMAGETRACKING /datum/status_effect/crusher_damage //tracks total kinetic crusher damage on a target

@@ -12,6 +12,7 @@
 	can_suppress = 0
 	clumsy_check = 0
 	needs_permit = 0
+	pb_knockback = 0
 
 /obj/item/gun/projectile/automatic/toy/process_chamber(eject_casing = 0, empty_chamber = 1)
 	..()

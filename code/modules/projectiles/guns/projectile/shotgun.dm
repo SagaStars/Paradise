@@ -11,6 +11,7 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot
 	fire_sound = 'sound/weapons/gunshots/gunshot_shotgun.ogg'
 	var/recentpump = 0 // to prevent spammage
+	pb_knockback = 1
 	weapon_weight = WEAPON_MEDIUM
 
 /obj/item/gun/projectile/shotgun/attackby(obj/item/A, mob/user, params)
@@ -216,6 +217,7 @@
 	can_bayonet = TRUE
 	knife_x_offset = 27
 	knife_y_offset = 13
+	pb_knockback = 1
 
 /obj/item/gun/projectile/shotgun/boltaction/pump(mob/M)
 	playsound(M, 'sound/weapons/gun_interactions/rifle_load.ogg', 60, 1)
@@ -288,6 +290,7 @@
 	origin_tech = "combat=6"
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/com
 	w_class = WEIGHT_CLASS_HUGE
+	pb_knockback = 2
 
 //Dual Feed Shotgun
 

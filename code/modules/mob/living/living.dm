@@ -238,7 +238,7 @@
 			return TRUE
 		A.visible_message("<span class='danger'>[src] points [hand_item] at [A]!</span>",
 											"<span class='userdanger'>[src] points [hand_item] at you!</span>")
-		A << 'sound/weapons/targeton.ogg'
+		playsound(src, 'sound/weapons/targeton.ogg', 85, 1, -1)
 		return TRUE
 	visible_message("<b>[src]</b> points to [A]")
 	return TRUE
@@ -943,6 +943,9 @@
 			AM.pulledby.stop_pulling() //an object can't be pulled by two mobs at once.
 	pulling = AM
 	AM.pulledby = src
+
+	SEND_SIGNAL(src, COMSIG_LIVING_START_PULL, AM, state, force)
+
 	if(pullin)
 		pullin.update_icon(src)
 	if(ismob(AM))
