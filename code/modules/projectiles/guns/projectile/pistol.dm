@@ -27,7 +27,6 @@
 	name = "\improper M1911"
 	desc = "A classic .45 handgun with a small magazine capacity."
 	icon_state = "m1911"
-	item_state = "revolver"
 	w_class = WEIGHT_CLASS_NORMAL
 	mag_type = /obj/item/ammo_box/magazine/m45
 	can_suppress = 0
@@ -84,7 +83,6 @@
 	name = "desert eagle"
 	desc = "A robust .50 AE handgun."
 	icon_state = "deagle"
-	item_state = "deagleg"
 	force = 14.0
 	mag_type = /obj/item/ammo_box/magazine/m50
 	fire_sound = 'sound/weapons/gunshots/gunshot_pistolH.ogg'
@@ -111,7 +109,6 @@
 	name = "stechkin APS pistol"
 	desc = "The original russian version of a widely used Syndicate sidearm. Uses 9mm ammo."
 	icon_state = "aps"
-	item_state = "revolver"
 	w_class = WEIGHT_CLASS_NORMAL
 	origin_tech = "combat=3;materials=2;syndicate=3"
 	mag_type = /obj/item/ammo_box/magazine/pistolm9mm
