@@ -1266,6 +1266,7 @@
 #include "code\HISPANIA\modules\projectiles\guns\medbeam.dm"
 #include "code\HISPANIA\modules\projectiles\guns\projectile\revolver.dm"
 #include "code\HISPANIA\modules\projectiles\projectiles\beams.dm"
+#include "code\HISPANIA\modules\projectiles\projectiles\energy.dm"
 #include "code\HISPANIA\modules\reagents\chemistry\reagents\alcohol.dm"
 #include "code\HISPANIA\modules\reagents\chemistry\reagents\drinks.dm"
 #include "code\HISPANIA\modules\reagents\chemistry\reagents\food.dm"
