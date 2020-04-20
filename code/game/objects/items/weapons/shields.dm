@@ -28,6 +28,7 @@
 	origin_tech = "materials=3;combat=4"
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
+	hispania_icon = TRUE
 
 /obj/item/shield/riot/attackby(obj/item/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/melee/baton))
@@ -44,6 +45,7 @@
 	icon_state = "roman_shield"
 	item_state = "roman_shield"
 	materials = list(MAT_METAL=8500)
+	hispania_icon = FALSE
 
 /obj/item/shield/riot/roman/fake
 	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>. It appears to be a bit flimsy."
@@ -59,6 +61,7 @@
 	origin_tech = "materials=1;combat=3;biotech=2"
 	resistance_flags = FLAMMABLE
 	block_chance = 30
+	hispania_icon = FALSE
 
 /obj/item/shield/energy
 	name = "energy combat shield"
@@ -119,6 +122,7 @@
 	throw_range = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	var/active = 0
+	hispania_icon = FALSE
 
 /obj/item/shield/riot/tele/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	if(active)
