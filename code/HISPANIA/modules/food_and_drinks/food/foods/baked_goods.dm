@@ -315,8 +315,8 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#EFD8A7"
 
-///        Pancakes    (Coughthanksumeandevancough) ///
 
+///        Pancakes    (Coughthanksumeandevancough) ///
 
 /obj/item/reagent_containers/food/snacks/pancake
     name = "pancake"
@@ -391,7 +391,6 @@ obj/item/reagent_containers/food/snacks/pancake/update_icon()
             to_chat(user, "<span class='warning'>You put the [pancake_mermelada] ontop of the [src]!</span>")
         else
             to_chat(user, "<span class='warning'>The stack is too high!</span>")
-
 //Toast//
 
 /obj/item/reagent_containers/food/snacks/toast
