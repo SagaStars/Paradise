@@ -10,7 +10,7 @@
 	name = "cheese anonna cake"
 	desc = "DANGEROUSLY sugary cheesy."
 	icon_state = "cheeseanonnacake"
-	slice_path = /obj/item/reagent_containers/food/snacks/cheeseanonnacakeslice
+	slice_path = /obj/item/reagent_containers/food/snacks/slicecake/cheeseanonnacakeslice
 	slices_num = 5
 	filling_color = "#FAF7AF"
 	bitesize = 3
@@ -18,7 +18,7 @@
 	tastes = list("cake" = 4, "sugary cream cheese" = 3)
 	icon = 'icons/hispania/obj/food/food.dmi'
 
-/obj/item/reagent_containers/food/snacks/cheeseanonnacakeslice
+/obj/item/reagent_containers/food/snacks/slicecake/cheeseanonnacakeslice
 	name = "cheese anonna cake slice"
 	desc = "Slice of pure cheestisfaction."
 	icon_state = "cheeseanonnacake_slice"
