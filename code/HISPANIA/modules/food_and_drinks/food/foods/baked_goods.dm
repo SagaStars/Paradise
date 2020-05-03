@@ -371,7 +371,7 @@ obj/item/reagent_containers/food/snacks/pancake/update_icon()
 /obj/item/reagent_containers/food/snacks/pancake_mermelada/update_icon()
     overlays = list()
     if(pancakes.len > 0)
-        desc = "A pile of delicious pancakes. There appears to be [pancakes.len+1] pancakes in the pile. All fully loaded of butter."
+        desc = "A pile of delicious pancakes. There appears to be [pancakes.len+1] pancakes in the pile. All fully loaded of jelly of nispero and berries."
     icon_state = "pancake_mermelada_[pancakes.len+1]"
 
 /obj/item/reagent_containers/food/snacks/pancake_mermelada/attackby(obj/item/reagent_containers/food/snacks/pancake_mermelada/I, mob/user, params)
