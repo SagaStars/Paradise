@@ -9,70 +9,27 @@
 	origin_tech = "powerstorage=4;materials=4;engineering=4"
 	force = 7
 	flags =  CONDUCT
+	var/opened = TRUE
 	var/obj/item/stock_parts/cell/cell
 	var/powertransfer = null
-	var/ratio = 0.15 //<15%> determina que porcentaje de la carga maxima promedio recargada (la mitad de la del objetivo entre la interna)
+	var/ratio = 0.12 //determina que porcentaje de la bateria objetivo de la induccion es recargado, 12%
 	var/coefficient_base = 1.1 //determina que porcentje de energia, del a bateria interna, se pierde al inducir, 10%
 	var/mintransfer = 250 //determina el valor minimo de la energia inducida
-	var/on = FALSE
 	var/recharging = FALSE
-
-/obj/item/inducer/attack_obj(obj/O, mob/living/carbon/user)
-	if(user.a_intent == INTENT_HARM)
-		return ..()
-	if(recharging)
-		return
-	if(afterattack(O, user))
-		return
-	return ..()
-
-/obj/item/inducer/emp_act(severity)
-	. = ..()
-	if(cell)
-		cell.emp_act(severity)
-
-/obj/item/inducer/proc/induce(obj/item/stock_parts/cell/target, coefficient)
-	var/promcharge = (target.maxcharge + cell.maxcharge)/2
-	powertransfer = max(mintransfer, (promcharge * ratio))
-	var/totransfer = min((cell.charge/coefficient), powertransfer)
-	var/transferred = target.give(totransfer)
-	cell.use(transferred * coefficient)
-	cell.update_icon()
-	target.update_icon()
-
-/obj/item/inducer/proc/invertinduce(obj/item/stock_parts/cell/target, coefficient)
-	var/promcharge = (target.maxcharge + cell.maxcharge)/2
-	powertransfer = max(mintransfer, (promcharge * ratio))
-	var/totransfer = min((target.charge/coefficient), powertransfer)
-	var/transferred = cell.give(totransfer)
-	target.use(transferred * coefficient)
-	cell.update_icon()
-	target.update_icon()
-
-/obj/item/inducer/attack(mob/M, mob/user)
-	if(user.a_intent == INTENT_HARM)
-		return ..()
-	if(recharging)
-		return
-	if(afterattack(M, user))
-		return
-	return ..()
-
-/obj/item/inducer/sci
+	var/on = FALSE
 	var/powered = FALSE
 	var/coeff = 17 //multiplica al consumo energetico de la estacion
-	var/opened = TRUE
 
-/obj/item/inducer/sci/Initialize()
+/obj/item/inducer/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 	update_icon()
 
-/obj/item/inducer/sci/Destroy()
+/obj/item/inducer/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/inducer/sci/process()
+/obj/item/inducer/process()
 	if(!on)
 		return
 	if(opened)
@@ -103,10 +60,23 @@
 			cell.update_icon()
 	update_icon()
 
-/obj/item/inducer/sci/get_cell()
+/obj/item/inducer/proc/induce(obj/item/stock_parts/cell/target, coefficient)
+	powertransfer = max(mintransfer, (target.maxcharge * ratio))
+	var/totransfer = min((cell.charge/coefficient), powertransfer)
+	var/transferred = target.give(totransfer)
+	cell.use(transferred * coefficient)
+	cell.update_icon()
+	target.update_icon()
+
+/obj/item/inducer/get_cell()
 	return cell
 
-/obj/item/inducer/sci/attackby(obj/item/W, mob/user)
+/obj/item/inducer/emp_act(severity)
+	. = ..()
+	if(cell)
+		cell.emp_act(severity)
+
+/obj/item/inducer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/screwdriver))
 		playsound(loc, W.usesound, 100, 1)
 		if(!opened)
@@ -138,7 +108,7 @@
 
 	return ..()
 
-/obj/item/inducer/sci/afterattack(atom/movable/A as mob|obj, mob/user as mob, flag, params)
+/obj/item/inducer/afterattack(atom/movable/A as mob|obj, mob/user as mob, flag, params)
 	if(user.a_intent == INTENT_HARM)
 		return FALSE
 
@@ -184,7 +154,8 @@
 
 	if(istype(A, /obj))
 		if(istype(A, /obj/machinery/power/apc))
-			coefficient = coefficient_base/GLOB.CELLRATE
+			// power_use * coefficient = 20*100 > 1000 = CELLRATE -> los inducers no aumentan la cantidad de energia que hay en la estacion
+			coefficient = 1000
 		O = A
 	if(C)
 		var/done_any = FALSE
@@ -212,7 +183,25 @@
 		return TRUE
 	recharging = FALSE
 
-/obj/item/inducer/sci/attack_self(mob/user)
+/obj/item/inducer/attack(mob/M, mob/user)
+	if(user.a_intent == INTENT_HARM)
+		return ..()
+	if(recharging)
+		return
+	if(afterattack(M, user))
+		return
+	return ..()
+
+/obj/item/inducer/attack_obj(obj/O, mob/living/carbon/user)
+	if(user.a_intent == INTENT_HARM)
+		return ..()
+	if(recharging)
+		return
+	if(afterattack(O, user))
+		return
+	return ..()
+
+/obj/item/inducer/attack_self(mob/user)
 	if(!opened || (opened && !cell))
 		on = !on
 		if(on)
@@ -229,10 +218,6 @@
 			playsound(get_turf(user), 'sound/magic/lightningshock.ogg', 50, 1, -1)
 			new/obj/effect/temp_visual/revenant/cracks(user.loc)
 			to_chat(user, "<span class='warning'>[src] electrocutes you!</span>")
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				if(H.get_int_organ(/obj/item/organ/internal/cell) && H.nutrition < 450)
-					H.set_nutrition(min(H.nutrition + 50, 450))
 			return
 	if(opened && cell)
 		user.visible_message("[user] removes [cell] from [src]!","<span class='notice'>You remove [cell].</span>")
@@ -241,7 +226,7 @@
 		cell = null
 		update_icon()
 
-/obj/item/inducer/sci/examine(mob/living/M)
+/obj/item/inducer/examine(mob/living/M)
 	..()
 	if(on)
 		to_chat(M,"<span class='notice'>the self charge is on.</span>")
@@ -254,7 +239,7 @@
 	if(opened)
 		to_chat(M,"<span class='notice'>Its battery compartment is open.</span>")
 
-/obj/item/inducer/sci/update_icon()
+/obj/item/inducer/update_icon()
 	cut_overlays()
 	if(!cell)
 		add_overlay("inducer-unpowered")
@@ -274,28 +259,35 @@
 		if(opened)
 			add_overlay("inducer-bat")
 
-/obj/item/inducer/apc
+/obj/item/inducerapc
 	name = "APC's inducer"
 	desc = "A tool for inductively charging APC's."
+	icon = 'icons/hispania/obj/tools.dmi'
 	icon_state = "inducer-engi"
 	item_state = "inducer-engi"
+	lefthand_file = 'icons/hispania/mob/inhands/equipment/tools_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/equipment/tools_righthand.dmi'
 	origin_tech = "powerstorage=4;materials=3;engineering=3"
-	var/cell_type = /obj/item/stock_parts/cell
-	ratio = 0.15 //<30%> determina que porcentaje de la carga maxima promedio recargada (la mitad de la del objetivo entre la interna)
-	coefficient_base = 1.1 //determina que porcentje de energia, del a bateria interna, se pierde al inducir, 10%
-	mintransfer = 50 //determina el valor minimo de la energia inducida
-	on = TRUE
+	force = 7
+	flags =  CONDUCT
+	var/opened = FALSE
+	var/cell_type = /obj/item/stock_parts/cell/crap
+	var/obj/item/stock_parts/cell/cell
+	var/powertransfer = null
+	var/ratio = 0.25 //determina que porcentaje de la bateria objetivo de la induccion es recargado, 12%
+	var/coefficient_base = 1.1 //determina que porcentje de energia, del a bateria interna, se pierde al inducir, 10%
+	var/mintransfer = 50 //determina el valor minimo de la energia inducida
+	var/recharging = FALSE
+	var/on = TRUE
 
-/obj/item/inducer/apc/Initialize()
+/obj/item/inducerapc/Initialize()
 	. = ..()
 	if(!cell && cell_type)
 		cell = new cell_type
-		cell.charge = 500
 	START_PROCESSING(SSobj, src)
-	cell.update_icon()
 	update_icon()
 
-/obj/item/inducer/apc/attack_self(mob/user)
+/obj/item/inducerapc/attack_self(mob/user)
 	on = !on
 	if(on)
 		to_chat(user,"<span class='notice'>switched to emission mode.</span>")
@@ -303,7 +295,7 @@
 		to_chat(user,"<span class='notice'>switched to suction mode.</span>")
 	update_icon()
 
-/obj/item/inducer/apc/update_icon()
+/obj/item/inducerapc/update_icon()
 	cut_overlays()
 	if(on)
 		if(cell.percent() >= 100)
@@ -313,10 +305,28 @@
 	else
 		add_overlay("inducer-unpowered")
 
-/obj/item/inducer/apc/proc/DisplayPower(powerused)
-	return "[powerused/2] kW"
+/obj/item/inducerapc/attack(mob/M, mob/user)
+	if(user.a_intent == INTENT_HARM)
+		return ..()
+	if(recharging)
+		return
+	if(afterattack(M, user))
+		return
+	return ..()
 
-/obj/item/inducer/apc/examine(mob/living/M)
+/obj/item/inducerapc/attack_obj(obj/O, mob/living/carbon/user)
+	if(user.a_intent == INTENT_HARM)
+		return ..()
+	if(recharging)
+		return
+	if(afterattack(O, user))
+		return
+	return ..()
+
+/obj/item/inducerapc/proc/DisplayPower(powerused)
+		return "[powerused] kW"
+
+/obj/item/inducerapc/examine(mob/living/M)
 	..()
 	if(on)
 		to_chat(M,"<span class='notice'>Emission mode is activate.</span>")
@@ -327,14 +337,36 @@
 	else
 		to_chat(M,"<span class='notice'>Its display is dark.</span>")
 
-/obj/item/inducer/apc/attackby(obj/item/W, mob/user)
+/obj/item/inducerapc/proc/induce(obj/item/stock_parts/cell/target, coefficient)
+	powertransfer = max(mintransfer, (cell.maxcharge * ratio))
+	var/totransfer = min((cell.charge/coefficient), powertransfer)
+	var/transferred = target.give(totransfer)
+	cell.use(transferred * coefficient)
+	cell.update_icon()
+	target.update_icon()
+
+/obj/item/inducerapc/proc/invertinduce(obj/item/stock_parts/cell/target, coefficient)
+	powertransfer = max(mintransfer, (cell.maxcharge * ratio))
+	var/totransfer = min((target.charge/coefficient), powertransfer)
+	var/transferred = cell.give(totransfer)
+	target.use(transferred * coefficient)
+	cell.update_icon()
+	target.update_icon()
+
+/obj/item/inducerapc/emp_act(severity)
+	. = ..()
+	if(cell)
+		cell.emp_act(severity)
+
+/obj/item/inducerapc/attackby(obj/item/W, mob/user)
 	if(afterattack(W, user))
 		return
+
 	return ..()
 
-/obj/item/inducer/apc/afterattack(obj/machinery/power/apc/A as obj, mob/user as mob, flag, params)
+/obj/item/inducerapc/afterattack(obj/machinery/power/apc/A as obj, mob/user as mob, flag, params)
 	if(!flag)
-		return FALSE
+		return
 
 	if(user.a_intent == INTENT_HARM)
 		return FALSE

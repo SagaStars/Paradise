@@ -1,7 +1,7 @@
 /datum/supply_packs/engineering/inducers
 	name = "Inducers Crate"
 	cost = 60
-	contains = list(/obj/item/inducer/apc, /obj/item/inducer/apc)
+	contains = list(/obj/item/inducerapc, /obj/item/inducerapc)
 	containername = "inducer crate"
 	containertype = /obj/structure/closet/crate/secure/engineering
 	access = ACCESS_ENGINE
