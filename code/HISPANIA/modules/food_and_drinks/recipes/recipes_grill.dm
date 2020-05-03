@@ -164,3 +164,11 @@
 		/obj/item/reagent_containers/food/snacks/grown/prickly_pear,
 	)
 	result = /obj/item/reagent_containers/food/snacks/meatsteak_cactus
+
+// BRONTOOOSAURIO//
+/datum/recipe/grill/brontosaurio
+	reagents = list("sodiumchloride" = 1)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/drakeribs
+	)
+	result = /obj/item/reagent_containers/food/snacks/brontosaurio
