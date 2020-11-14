@@ -7,5 +7,4 @@
 /obj/item/ammo_casing/energy/lasergun2
 	projectile_type = /obj/item/projectile/beam/laser2
 	e_cost = 83
-	delay = 15
 	select_name = "kill"
