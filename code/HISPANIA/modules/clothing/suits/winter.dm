@@ -1,6 +1,9 @@
 /obj/item/clothing/suit/hooded/armor
 	name = "warden's armored winter coat"
 	desc = "A heavy armored jacket made from 'synthetic' animal furs with silver rank pips and livery."
+	icon = 'icons/hispania/obj/clothing/suits.dmi'
+	lefthand_file = 'icons/hispania/mob/inhands/clothing_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/clothing_righthand.dmi'
 	icon_state = "wintercoat_warden"
 	item_state = "wintercoat_warden"
 	allowed = list(/obj/item/gun/energy,/obj/item/reagent_containers/spray/pepper,/obj/item/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/restraints/handcuffs,/obj/item/flashlight/seclite,/obj/item/melee/classic_baton/telescopic,/obj/item/kitchen/knife)
@@ -14,10 +17,10 @@
 	max_integrity = 250
 	flags_inv = HIDEJUMPSUIT
 	resistance_flags = NONE
-	hispania_icon = TRUE
 	dog_fashion = null
 	armor = list("melee" = 30, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 25, "acid" = 25)
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/security/warden
+	sprite_sheets = list("Vox" = 'icons/hispania/mob/species/vox/suit.dmi')
 
 /obj/item/clothing/suit/hooded/armor/hos
 	name = "armored winter coat"
@@ -56,13 +59,17 @@
 	icon_state = "winterhood_warden"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 15, "acid" = 25)
 	hispania_icon = TRUE
+	sprite_sheets = list("Vox" = 'icons/hispania/mob/species/vox/head.dmi')
 
 /obj/item/clothing/head/hooded/winterhood/security/detective
 	icon_state = "winterhood_detective"
 	armor = list("melee" = 25, "bullet" = 5, "laser" = 25, "energy" = 10, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 15, "acid" = 25)
 	hispania_icon = TRUE
+	sprite_sheets = list("Vox" = 'icons/hispania/mob/species/vox/head.dmi')
 
 /obj/item/clothing/head/hooded/winterhood/security/hos
 	icon_state = "winterhood_hos"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 15, "acid" = 25)
 	hispania_icon = TRUE
+	sprite_sheets = list("Vox" = 'icons/hispania/mob/species/vox/head.dmi')
+
