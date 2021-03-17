@@ -1302,6 +1302,7 @@
 #include "code\hispania\modules\mob\new_player\sprite_accessories\slime\slime_hair.dm"
 #include "code\hispania\modules\power\apc.dm"
 #include "code\hispania\modules\power\cell.dm"
+#include "code\hispania\modules\projectiles\gun.dm"
 #include "code\hispania\modules\projectiles\ammo\energy.dm"
 #include "code\hispania\modules\projectiles\guns\energy.dm"
 #include "code\hispania\modules\projectiles\guns\medbeam.dm"

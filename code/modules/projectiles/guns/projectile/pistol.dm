@@ -50,7 +50,6 @@
 	options["Green Handle"] = "enforcer_greengrip"
 	options["Tan Handle"] = "enforcer_tangrip"
 	options["Red Handle"] = "enforcer_redgrip"
-	options["Cancel"] = null
 
 /obj/item/gun/projectile/automatic/pistol/enforcer/update_icon()
 	..()
