@@ -14,3 +14,7 @@
 	if(outline_filter)
 		filters -= outline_filter
 		outline_filter = null
+
+/obj/item/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	remove_outline()
