@@ -258,7 +258,6 @@ SUBSYSTEM_DEF(ticker)
 		for(var/holidayname in SSholiday.holidays)
 			var/datum/holiday/holiday = SSholiday.holidays[holidayname]
 			to_chat(world, "<h4>[holiday.greet()]</h4>")
-	
 	SSdiscord.send2discord_simple("**\[Info]** Round has started") //El _noadmins al final de SSdiscord.send2discord_simple hacia que mencione a los admins cada vez que comenzaba una ronda, lo cual era innecesario
 	auto_toggle_ooc(FALSE) // Turn it off
 	round_start_time = world.time
@@ -476,6 +475,9 @@ SUBSYSTEM_DEF(ticker)
 			emobtext += "<br>"
 		emobtext += "<br>"
 		to_chat(world, emobtext)
+
+	if(mode.eventmode)
+		mode.eventmode.eventmode_end()
 
 	mode.declare_completion()//To declare normal completion.
 
