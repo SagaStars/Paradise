@@ -72,7 +72,7 @@
 		if(objectives && objectives.len)//If the traitor had no objectives, don't need to process this.
 			var/count = 1
 			for(var/datum/objective/o in objectives)
-				if(objective.check_completion())
+				if(o.check_completion())
 					text += "<br><B>Objective #[count]</B>: [o.explanation_text] <font color='green'><B>Success!</B></font>"
 					SSblackbox.record_feedback("nested tally", "traitor_objective", 1, list("[o.type]", "SUCCESS"))
 				else
