@@ -68,7 +68,7 @@
 		text += "<br><span class='medium'><b>The fugitive was:</b></span><br>"
 		text += printplayer(fugitivo)
 		text += "<br>"
-		var/list/objectives = fugitivo.objectives
+		var/objectives = fugitivo.objectives
 		if(objectives && objectives.len)//If the traitor had no objectives, don't need to process this.
 			var/count = 1
 			for(var/datum/objective/o in objectives)
