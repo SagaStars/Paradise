@@ -43,7 +43,7 @@
 	con.explanation_text = "Make contact with the Syndicate."
 	fug.mind.objectives += con
 
-	to_chat(fug, "<span class='biggerdanger'>You need to make contact with the syndicate for your extraction, there's a paper stored in your backpack with further instructions.</span>")
+	to_chat(fug, "<span class='notice'>You need to make contact with the syndicate for your extraction, there's a paper stored in your backpack with further instructions.</span>")
 
 	H.f_style = "Brad"
 	fug.regenerate_icons()
@@ -68,7 +68,7 @@
 		text += "<br><span class='medium'><b>The fugitive was:</b></span><br>"
 		text += printplayer(fugitivo)
 		text += "<br>"
-		var/objectives = fugitivo.objectives
+		var/list/objectives = fugitivo.objectives
 		if(objectives && objectives.len)//If the traitor had no objectives, don't need to process this.
 			var/count = 1
 			for(var/datum/objective/o in objectives)
