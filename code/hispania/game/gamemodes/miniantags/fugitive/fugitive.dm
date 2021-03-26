@@ -68,15 +68,16 @@
 		text += "<br><span class='medium'><b>The fugitive was:</b></span><br>"
 		text += printplayer(fugitivo)
 		text += "<br>"
-		if(fugitivo.objectives && fugitivo.objectives.len)//If the traitor had no objectives, don't need to process this.
+		var/list/objectives = fugitivo.objectives
+		if(objectives && objectives.len)//If the traitor had no objectives, don't need to process this.
 			var/count = 1
-			for(var/datum/objective/objective in fugitivo.objectives)
+			for(var/datum/objective/o in objectives)
 				if(objective.check_completion())
-					text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
-					SSblackbox.record_feedback("nested tally", "traitor_objective", 1, list("[objective.type]", "SUCCESS"))
+					text += "<br><B>Objective #[count]</B>: [o.explanation_text] <font color='green'><B>Success!</B></font>"
+					SSblackbox.record_feedback("nested tally", "traitor_objective", 1, list("[o.type]", "SUCCESS"))
 				else
-					text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
-					SSblackbox.record_feedback("nested tally", "traitor_objective", 1, list("[objective.type]", "FAIL"))
+					text += "<br><B>Objective #[count]</B>: [o.explanation_text] <font color='red'>Fail.</font>"
+					SSblackbox.record_feedback("nested tally", "traitor_objective", 1, list("[o.type]", "FAIL"))
 					win = FALSE
 		if(win)
 			text += "<br><font color='green'><B>The fugitive was successful!</B></font><br>"
