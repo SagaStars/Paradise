@@ -56,7 +56,7 @@
 
 /datum/game_mode/fugitive/check_finished()
 	var/text = ""
-	if(fugitivo)
+	if(fugitivo && fugitivo.objectives)
 		var/win = TRUE
 		text += "<br><span class='medium'><b>The fugitive was:</b></span><br>"
 		text += printplayer(fugitivo)
