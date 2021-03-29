@@ -83,6 +83,12 @@
 /obj/effect/landmark/fugitive
 	name = "fugitive"
 
+/obj/effect/landmark/fugitive/friend
+	name = "fugitivefriend"
+
+/obj/effect/landmark/fugitive/shuttle
+	name = "fugitiveshuttlestoler"
+
 /* Para mas tarde, descansa mi dulce principe
 /datum/game_mode/proc/muertealfugitive(datum/mind/abductor_mind)
 	if(abductor_mind in abductors)
