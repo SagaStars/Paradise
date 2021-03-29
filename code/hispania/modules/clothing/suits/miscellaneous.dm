@@ -35,3 +35,13 @@
 		return FALSE
 	if (prob(hit_reflect_chance))
 		return TRUE
+
+/obj/item/clothing/suit/hooded/wintercoat/artic
+	name = "artic winter coat"
+	icon = 'icons/hispania/obj/clothing/suits.dmi'
+	icon_state = "wintercoat_artic"
+	item_state = "wintercoat_artic"
+	hispania_icon = TRUE
+	allowed = list(/obj/item/gun/energy, /obj/item/reagent_containers/spray/pepper, /obj/item/gun/projectile, /obj/item/ammo_box, /obj/item/ammo_casing, /obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/flashlight/seclite, /obj/item/melee/classic_baton/telescopic)
+	hoodtype = /obj/item/clothing/head/hooded/winterhood/science
+	sprite_sheets = list("Vox" = 'icons/hispania/mob/species/vox/head.dmi')

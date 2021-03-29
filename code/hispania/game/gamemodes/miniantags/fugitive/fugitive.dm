@@ -51,17 +51,10 @@
 
 	return fug
 
-/datum/game_mode/fugitive/check_finished() // loop de ticker
-	if(!completao)
-		// si lo logro, enhorabuena
-		completao = TRUE
-		return ..()
-	return ..()
-
 /datum/game_mode/fugitive/eventmode_end()
-	auto_declare_completion_fugitive()
+	check_finished()
 
-/datum/game_mode/fugitive/proc/auto_declare_completion_fugitive()
+/datum/game_mode/fugitive/check_finished()
 	var/text = ""
 	if(fugitivo)
 		var/win = TRUE

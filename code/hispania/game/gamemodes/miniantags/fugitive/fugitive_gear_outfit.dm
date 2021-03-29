@@ -24,6 +24,28 @@
 	l_pocket = /obj/item/lighter/zippo
 	r_pocket = /obj/item/door_remote/omni/access_tuner/fugitive
 
+/datum/outfit/fugitive2
+	name = "The Fugitive Friend"
+
+	uniform = /obj/item/clothing/under/mafia/vest
+	suit = /obj/item/clothing/suit/jacket/miljacket/white
+	belt = /obj/item/storage/fancy/cigarettes/cigpack_syndicate
+	mask = /obj/item/clothing/mask/cigarette/syndicate
+	shoes = /obj/item/clothing/shoes/laceup
+	glasses = /obj/item/clothing/glasses/sunglasses/big
+	head = /obj/item/clothing/head/soft/grey
+
+	l_pocket = /obj/item/lighter/zippo
+
+/datum/outfit/fugitive3
+	name = "The Stolen Ship Owner"
+
+	uniform = /obj/item/clothing/under/victsuit/red
+	gloves = /obj/item/clothing/gloves/color/black
+	belt = /obj/item/storage/belt/fannypack/black
+	shoes = /obj/item/clothing/shoes/laceup
+	glasses = /obj/item/clothing/glasses/sunglasses/big
+
 /obj/item/clothing/under/color/orange/prison/fugitive
 	desc = "It's standardised SolGOV prisoner-wear. Its suit sensors are broken."
 	icon = 'icons/hispania/mob/suit.dmi'

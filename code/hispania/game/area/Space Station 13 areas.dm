@@ -12,3 +12,20 @@
 /area/shuttle/tsf
 	name = "TSF Discovery"
 	icon_state = "shuttle"
+
+/area/fug_outdoors
+	name = "??? Outdoors"
+	icon_state = "bluenew"
+	nad_allowed = TRUE
+	outdoors = TRUE
+
+/area/fug_home
+	name = "Stolen House"
+	icon_state = "slime"
+	nad_allowed = TRUE
+
+/area/shuttle/fug_shuttle
+	name = "\improper Stolen Shuttle"
+	icon_state = "blue"
+	nad_allowed = TRUE
+	parallax_movedir = SOUTH
