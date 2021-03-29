@@ -3,7 +3,7 @@
 /datum/game_mode/fugitive
 	name = "fugitive"
 	config_tag = "fugitive"
-	var/list/datum/mind/fugitivo
+	var/datum/mind/fugitivo
 	votable = 0
 	var/completao = FALSE
 
@@ -56,7 +56,7 @@
 
 /datum/game_mode/fugitive/check_finished()
 	var/text = ""
-	if(fugitivo && fugitivo.objectives)
+	if(fugitivo)
 		var/win = TRUE
 		text += "<br><span class='medium'><b>The fugitive was:</b></span><br>"
 		text += printplayer(fugitivo)
