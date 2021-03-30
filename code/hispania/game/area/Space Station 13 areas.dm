@@ -18,11 +18,14 @@
 	icon_state = "bluenew"
 	nad_allowed = TRUE
 	outdoors = TRUE
+	ambientsounds = SNOWY
+	sound_environment = SOUND_AREA_LAVALAND
 
 /area/fug_home
 	name = "Stolen House"
 	icon_state = "slime"
 	nad_allowed = TRUE
+	sound_environment = SOUND_AREA_WOODFLOOR
 
 /area/shuttle/fug_shuttle
 	name = "\improper Stolen Shuttle"
