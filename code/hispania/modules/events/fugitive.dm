@@ -1,6 +1,5 @@
 /datum/event/spawn_fugitive
 	announceWhen = 120
-	var/key_of_fugitive
 
 /datum/event/spawn_fugitive/announce()
 	//GLOB.event_announcement.Announce("Unknown entity detected aboard [station_name()]. Please report any sightings to local authority.", "Bioscan Alert", 'sound/hispania/effects/oldman/alert.ogg')
@@ -9,16 +8,13 @@
 	spawn()
 		var/list/candidates = pollCandidatesWithVeto(src,usr,null,"Do you want to play as the fugitive?",null,null,10 SECONDS,TRUE,null,TRUE,FALSE, source = image('icons/hispania/obj/event_icon.dmi', "fugitive"))
 		if(!length(candidates))
-			key_of_fugitive = null
 			kill()
 			return
 		var/mob/C = pick(candidates)
-		key_of_fugitive = C.key
-
-		if(!key_of_fugitive)
+		if(!C.key)
 			kill()
 			return
-		var/datum/mind/player_mind = new /datum/mind(key_of_fugitive)
+		var/datum/mind/player_mind = new /datum/mind(C.key)
 		player_mind.active = TRUE
 
 		var/datum/game_mode/fugitive/elfugao = new

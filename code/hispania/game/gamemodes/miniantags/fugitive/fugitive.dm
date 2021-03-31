@@ -1,11 +1,90 @@
-#define SPECIAL_ROLE_FUGITIVE "Fugitive"
+#define SPECIAL_ROLE_FUGITIVE 			"Fugitive"
+#define SPECIAL_ROLE_FUGITIVEFRIEND 	"FugitiveFriend"
+#define SPECIAL_ROLE_FUGITIVESHUTTLE 	"FugitiveShuttleOwner"
 
 /datum/game_mode/fugitive
 	name = "fugitive"
 	config_tag = "fugitive"
-	var/datum/mind/fugitivo
 	votable = 0
-	var/completao = FALSE
+	var/datum/mind/fugitivo
+	var/datum/mind/lefriend
+	var/datum/mind/shuttleowner
+
+/datum/game_mode/fugitive/proc/setup_rescatists()
+	var/list/compadres = pollCandidatesWithVeto(src,usr,2,"Do you want to play as the fugitive?",null,null,10 SECONDS,TRUE,null,TRUE,FALSE, source = image('icons/hispania/obj/event_icon.dmi', "fugitive"))
+	if(length(compadres) < 2)
+		// UUUUHH... a reintentar
+		return
+
+	var/mob/friendo = pick(compadres)
+	compadres -= friendo
+
+	var/mob/ladroncillo = pick(compadres)
+
+	if(!ladroncillo.key || !friendo.key)
+		// UHHHH.... a reintentar
+		return
+
+	var/list/spawn_locs1 = list()
+	var/list/spawn_locs2 = list()
+	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
+		if(isturf(L.loc))
+			switch(L.name)
+				if("fugitivefriend")
+					spawn_locs1 += L.loc
+				if("fugitiveshuttlestoler")
+					spawn_locs2 += L.loc
+	if(!spawn_locs1 || !spawn_locs2) // Pues si no los encontramos es por que han de haber jodido algo alla, asi que no mas rescatistas.
+		// CANCELAR
+		return
+
+	var/datum/mind/lefriend_mind = new /datum/mind(friendo.key)
+	lefriend_mind.active = TRUE
+	var/datum/mind/shuttle_mind = new /datum/mind(ladroncillo.key)
+	shuttle_mind.active = TRUE
+
+	lefriend = lefriend_mind
+	shuttleowner = shuttle_mind
+
+	var /mob/living/carbon/human/fugfriend = new /mob/living/carbon/human/(pick(spawn_locs1))
+	var/datum/outfit/galan = new/datum/outfit/fugitive2
+	galan.equip(fugfriend)
+
+	var /mob/living/carbon/human/fugshuttle = new /mob/living/carbon/human/(pick(spawn_locs2))
+	var/datum/outfit/culero = new/datum/outfit/fugitive3
+	culero.equip(fugshuttle)
+
+	lefriend_mind.transfer_to(fugfriend)
+	lefriend_mind.assigned_role = SPECIAL_ROLE_FUGITIVEFRIEND
+	lefriend_mind.special_role = SPECIAL_ROLE_FUGITIVEFRIEND
+
+	var/obj/item/organ/external/head/H = fugfriend.get_organ("head")
+	H.f_style = "Brad" // Barba bros
+	fugfriend.regenerate_icons()
+
+	shuttle_mind.transfer_to(fugshuttle)
+	shuttle_mind.assigned_role = SPECIAL_ROLE_FUGITIVESHUTTLE
+	shuttle_mind.special_role = SPECIAL_ROLE_FUGITIVESHUTTLE
+
+	to_chat(fugfriend, "<B>You are an old fugitive of Permabrig, resting like a baby in maint.</B>")
+	to_chat(fugfriend, "<B>You are slow, but very durable. Your attacks slows and corrode your victims.</B>")
+	to_chat(fugfriend, "<B>You may Click on walls to travel through them, appearing and disappearing from the station at will.</B>")
+	to_chat(fugfriend, "<B>You hunger is endless. If you do not find a new meal after the previous one, you will leave this station to continue hunting.</B>")
+	to_chat(fugfriend, "<B>Pulling a dead or critical mob while you enter a wall will pull them in with you, healing you and sending them to your pocket dimension.</B>")
+
+	to_chat(fugshuttle, "<B>You are an old fugitive of Permabrig, resting like a baby in maint.</B>")
+	to_chat(fugshuttle, "<B>You are slow, but very durable. Your attacks slows and corrode your victims.</B>")
+	to_chat(fugshuttle, "<B>You may Click on walls to travel through them, appearing and disappearing from the station at will.</B>")
+	to_chat(fugshuttle, "<B>You hunger is endless. If you do not find a new meal after the previous one, you will leave this station to continue hunting.</B>")
+	to_chat(fugshuttle, "<B>Pulling a dead or critical mob while you enter a wall will pull them in with you, healing you and sending them to your pocket dimension.</B>")
+
+	//var/datum/objective/contact/con = new
+	//con.owner = fug.mind
+	//con.explanation_text = "Make contact with the Syndicate."
+	//fug.mind.objectives += con
+
+	to_chat(fugfriend, "<span class='notice'>A phone is ringing in the live room, prepare and get out.</span>")
+	to_chat(fugshuttle, "<span class='notice'>A phone is ringing in the live room, prepare and get out.</span>")
 
 /datum/game_mode/fugitive/proc/setup_fugitive(datum/mind/player_mind)
 	var/list/spawn_locs = list()
