@@ -16,7 +16,8 @@
 	head = /obj/item/clothing/head/soft/grey
 
 	backpack_contents = list(
-		/obj/item/documents/solgov = 1
+		/obj/item/documents/solgov = 1,
+		/obj/item/pendrive = 1
 		)
 
 	l_hand = /obj/item/clothing/gloves/color/yellow
