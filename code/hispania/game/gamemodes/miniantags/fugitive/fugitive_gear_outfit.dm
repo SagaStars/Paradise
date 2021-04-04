@@ -62,8 +62,6 @@
 	icon = 'icons/hispania/obj/device.dmi'
 	icon_state = "hacktool-fug"
 	item_state = "hacktool"
-	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
 	hack_speed = 40
 	var/probability = 16.66
 
@@ -120,6 +118,21 @@
 				flick("hacktool-fug-n",src)
 				to_chat(user, "<span class='danger'>[src] does not have access to this door.</span>")
 	busy = FALSE
+
+/obj/item/pendrive
+	name = "special-kind pendrive"
+	desc = "Who knows what this thing can do."
+	icon = 'icons/hispania/obj/device.dmi'
+	lefthand_file = 'icons/hispania/mob/inhands/items_lefthand.dmi'
+	righthand_file = 'icons/hispania/mob/inhands/items_righthand.dmi'
+	icon_state = "pendrive"
+	item_state = "pendrive"
+
+/obj/item/pendrive/examine(mob/living/M)
+	. = ..()
+	var/datum/game_mode/fugitive/G = SSticker.mode.eventmode
+	if(G.fugitivo)
+		. += "<span class='notice'>There's an tag attached to the pendrive. \"Le Owner [G.fugitivo.current]\".</span>"
 
 /obj/item/documents/solgov
 	desc = "\"Top Secret\" SolGOV prision documents printed on special copy-protected paper. It is filled with complex diagrams and lists of names, dates and coordinates."
