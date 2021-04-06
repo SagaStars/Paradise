@@ -6,15 +6,27 @@
 	name = "fugitive"
 	config_tag = "fugitive"
 	votable = 0
+	var/loops = 0 // Numeros de intentos fallidos buscando a los compadres
 	var/datum/mind/fugitivo
 	var/datum/mind/lefriend
 	var/datum/mind/shuttleowner
 
 /datum/game_mode/fugitive/proc/setup_rescatists()
+	to_chat(fugitivo.current, "<span class='notice'>Loop [loops].</span>")
+	switch(loops)
+		if(1)
+			to_chat(fugitivo.current, "<span class='notice'>They're taking a while.</span>")
+		if(2)
+			to_chat(fugitivo.current, "<span class='notice'>Quite a while...</span>")
+		if(3)
+			to_chat(fugitivo.current, "<span class='notice'>Well, what an awful fail. If help won't come then its time for a new plan.</span>")
+			newplan()
+			return
 	var/list/compadres = pollCandidatesWithVeto(src,usr,2,"Do you want to play as the fugitive?",null,null,10 SECONDS,TRUE,null,TRUE,FALSE, source = image('icons/hispania/obj/event_icon.dmi', "fugitive"))
 	if(length(compadres) < 2)
-		// UUUUHH... a reintentar
-		return
+		loops++
+		sleep(3000)
+		return setup_rescatists()
 
 	var/mob/friendo = pick(compadres)
 	compadres -= friendo
@@ -22,8 +34,9 @@
 	var/mob/ladroncillo = pick(compadres)
 
 	if(!ladroncillo.key || !friendo.key)
-		// UHHHH.... a reintentar
-		return
+		loops++
+		sleep(3000)
+		return setup_rescatists()
 
 	var/list/spawn_locs1 = list()
 	var/list/spawn_locs2 = list()
@@ -35,7 +48,8 @@
 				if("fugitiveshuttlestoler")
 					spawn_locs2 += L.loc
 	if(!spawn_locs1 || !spawn_locs2) // Pues si no los encontramos es por que han de haber jodido algo alla, asi que no mas rescatistas.
-		// CANCELAR
+		to_chat(fugitivo, "<span class='notice'>Well, what an awful fail. If help won't come then its time for a new plan.</span>")
+		newplan()
 		return
 
 	var/datum/mind/lefriend_mind = new /datum/mind(friendo.key)
@@ -78,13 +92,24 @@
 	to_chat(fugshuttle, "<B>You hunger is endless. If you do not find a new meal after the previous one, you will leave this station to continue hunting.</B>")
 	to_chat(fugshuttle, "<B>Pulling a dead or critical mob while you enter a wall will pull them in with you, healing you and sending them to your pocket dimension.</B>")
 
-	//var/datum/objective/contact/con = new
-	//con.owner = fug.mind
-	//con.explanation_text = "Make contact with the Syndicate."
-	//fug.mind.objectives += con
+	var/datum/objective/fug/docs/O = new
+	O.owner = lefriend
+	lefriend.objectives += O
+
+	var/datum/objective/protect/Oii = new
+	Oii.target = fugitivo
+	Oii.owner = lefriend
+	lefriend.objectives += Oii
+
+	var/datum/objective/fug/docs/OO = new
+	OO.owner = shuttleowner
+	shuttleowner.objectives += OO
 
 	to_chat(fugfriend, "<span class='notice'>A phone is ringing in the live room, prepare and get out.</span>")
 	to_chat(fugshuttle, "<span class='notice'>A phone is ringing in the live room, prepare and get out.</span>")
+	to_chat(fugitivo, "<span class='notice'>You feeled as if someone cheered for you.</span>")
+
+/datum/game_mode/fugitive/proc/newplan()
 
 /datum/game_mode/fugitive/proc/setup_fugitive(datum/mind/player_mind)
 	var/list/spawn_locs = list()
@@ -93,7 +118,7 @@
 			switch(L.name)
 				if("fugitive")
 					spawn_locs += L.loc
-	if(!spawn_locs) //If we can't find either, just spawn the oldman at the player's location
+	if(!spawn_locs)
 		spawn_locs += get_turf(player_mind.current)
 	fugitivo = player_mind
 	var /mob/living/carbon/human/fug = new /mob/living/carbon/human/(pick(spawn_locs))
@@ -110,17 +135,17 @@
 	player_mind.assigned_role = SPECIAL_ROLE_FUGITIVE
 	player_mind.special_role = SPECIAL_ROLE_FUGITIVE
 
-	to_chat(fug, "<B>You are an old fugitive of Permabrig, resting like a baby in maint.</B>")
-	to_chat(fug, "<B>You are slow, but very durable. Your attacks slows and corrode your victims.</B>")
-	to_chat(fug, "<B>You may Click on walls to travel through them, appearing and disappearing from the station at will.</B>")
-	to_chat(fug, "<B>You hunger is endless. If you do not find a new meal after the previous one, you will leave this station to continue hunting.</B>")
-	to_chat(fug, "<B>Pulling a dead or critical mob while you enter a wall will pull them in with you, healing you and sending them to your pocket dimension.</B>")
-	//to_chat(fug, "<B><span class ='notice'>You are not currently in the same plane of existence as the station. Click a wall to emerge.</span></B>")
+	to_chat(fug, "<B>You are an old fugitive of an long far away Prision of SolGov, sentenced to death because of collaboration with the syndicate.</B>")
+	to_chat(fug, "<B>Nonetheless, you achieved your great escape with some important documents by your side, be ready for the final step of your plan.</B>")
+	to_chat(fug, "<B>Redeem yourself to the syndicate once more, prove them you are worthy, bring the documents to them.</B>")
 
-	var/datum/objective/contact/con = new
-	con.owner = fug.mind
-	con.explanation_text = "Make contact with the Syndicate."
-	fug.mind.objectives += con
+	var/datum/objective/fug/O = new
+	O.owner = fugitivo
+	fugitivo.objectives += O
+
+	var/datum/objective/fug/docs/Oii = new
+	Oii.owner = fugitivo
+	fugitivo.objectives += Oii
 
 	to_chat(fug, "<span class='notice'>You need to make contact with the syndicate for your extraction, there's a paper stored in your backpack with further instructions.</span>")
 

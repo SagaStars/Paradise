@@ -6,7 +6,8 @@
 			do_sparks(3, 1, src)
 			ion = TRUE
 			update_icon()
-			//mandarevento
+			spawn()
+				fugitive.setup_rescatists()
 			qdel(O)
 			to_chat(user, "<span class='notice'>That should do the job.</span>")
 			spawn()
@@ -22,8 +23,9 @@
 		var/datum/game_mode/fugitive/fugitive = SSticker.mode.eventmode
 		user.visible_message("<span class='warning'>Something is inserted in the [src] making a click sound!</span>", "<span class='notice'>You insert the pendrive in the [src].</span>")
 		if(fugitive)
-			//mandarevento
 			emag_act(user)
+			spawn()
+				fugitive.setup_rescatists()
 			qdel(O)
 			if(src.linkedServer.active) // ADIOS PDA Y REQUEST CONSOLE
 				src.linkedServer.active = FALSE
