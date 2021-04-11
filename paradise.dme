@@ -11,7 +11,7 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "_maps\__MAP_DEFINES.dm"
-#include "_maps\hispania.dm"
+#include "_maps\eros.dm"
 #include "code\_compile_options.dm"
 #include "code\hub.dm"
 #include "code\world.dm"
@@ -1173,6 +1173,7 @@
 #include "code\hispania\game\mecha\paintkits.dm"
 #include "code\hispania\game\mecha\equipament\tools\medical_tools.dm"
 #include "code\hispania\game\objects\items.dm"
+#include "code\hispania\game\objects\effects\decals\turfdecals\markings.dm"
 #include "code\hispania\game\objects\items\folding.dm"
 #include "code\hispania\game\objects\items\inducer.dm"
 #include "code\hispania\game\objects\items\policetape.dm"
@@ -1324,6 +1325,7 @@
 #include "code\hispania\modules\reagents\chemistry\recipes\drinks.dm"
 #include "code\hispania\modules\reagents\chemistry\recipes\slime_extracts.dm"
 #include "code\hispania\modules\reagents\reagent_containers\glass_containers.dm"
+#include "code\hispania\modules\recycling\sortingmachinery.dm"
 #include "code\hispania\modules\research\circuitprinter.dm"
 #include "code\hispania\modules\research\rdconsole.dm"
 #include "code\hispania\modules\research\designs\autolathe_designs.dm"
