@@ -1,9 +1,9 @@
-var/static/list/image/hazard_overlays = list(
+GLOBAL_LIST_INIT(hazard_overlays, list(
 	"[NORTH]"	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "N"),
 	"[EAST]"	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "E"),
 	"[SOUTH]"	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "S"),
 	"[WEST]"	= new/image('icons/hispania/effects/hazard_tape.dmi', icon_state = "W"),
-	)
+	))
 
 GLOBAL_LIST_INIT(tape_roll_applications, list())
 
@@ -233,7 +233,7 @@ GLOBAL_LIST_INIT(tape_roll_applications, list())
 	if (istype(A, /turf/simulated/floor))
 		var/turf/F = A
 		var/direction = user.loc == F ? user.dir : turn(user.dir, 180)
-		var/icon/hazard_overlay = hazard_overlays["[direction]"]
+		var/icon/hazard_overlay = GLOB.hazard_overlays["[direction]"]
 		if(GLOB.tape_roll_applications[F] == null)
 			GLOB.tape_roll_applications[F] = 0
 
