@@ -260,7 +260,7 @@ GLOBAL_LIST_INIT(tape_roll_applications, list())
 	else
 		return ..(mover)
 
-/obj/structure/taper/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/taper/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.a_intent == INTENT_HARM)
 		breaktape(user)
 
