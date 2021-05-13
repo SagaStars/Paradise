@@ -18,6 +18,10 @@
 	icon_state = "dangercee"
 	plane = -2
 
+/obj/effect/turf_decal/hispania/actualdangerfull
+	icon_state = "actualdangerfull"
+	plane = -2
+
 /obj/effect/turf_decal/hispania/prision
 	icon_state = "prision"
 
