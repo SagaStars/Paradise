@@ -46,6 +46,7 @@
 		)
 	var/datum/track/selection
 	var/track = ""
+	var/musicrange = 10
 
 /datum/track
 	song_name = "???"
@@ -132,7 +133,7 @@
 		. += "<span class='notice'>[bicon(src)] Estas escuchando \"[selection.song_name]\" [bicon(image)]</span>"
 
 /obj/machinery/hispaniabox/proc/double_jukebox()
-	for(var/obj/machinery/hispaniabox/B in range(20,src))
+	for(var/obj/machinery/hispaniabox/B in range(musicrange*2,src))
 		if (B != src && B.active)
 			return TRUE
 	return FALSE
@@ -226,7 +227,7 @@
 	if(world.time < stop && active)
 		var/sound/song_played = sound(selection["song_path"])
 
-		for(var/mob/M in range(10,src))
+		for(var/mob/M in range(musicrange,src))
 			if(!(M in rangers))
 				rangers[M] = TRUE
 
@@ -234,7 +235,7 @@
 					continue
 				M.playsound_local(src, null, 100, channel = CHANNEL_JUKEBOX, S = song_played)
 		for(var/mob/L in rangers)
-			if(get_dist(src, L) > 10)
+			if(get_dist(src, L) > musicrange)
 				rangers -= L
 				if(!L || !L.client)
 					continue
@@ -266,3 +267,4 @@
 	songs = list(
 		"Play/Pause",
 		"WORK HARDER NOT SMARTER || Work Harder - LISA"    = new /datum/track('sound/hispania/hispaniabox/harder.ogg',	1240,	5,	"harder", "Work Harder - LISA"),)
+	musicrange = 5
