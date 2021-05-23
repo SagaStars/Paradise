@@ -139,7 +139,6 @@ GLOBAL_LIST_EMPTY(channel_to_radio_key)
 	//parse the language code and consume it
 
 	SEND_SIGNAL(src, COMSIG_MOB_SAY, message) // HISPANIA
-	to_chat(src, "[messagereal]")
 	message = messagereal
 	messagereal = null // HISPANIA PERDONAME
 

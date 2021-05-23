@@ -90,7 +90,7 @@
 			dumb_thing = FALSE //only once per life
 		else
 			to_chat(quirk_holder, "<span class='warning'>You think that wouldn't add much to the conversation and decide not to say it.</span>")
-			if(prob(min(25,(0.25*(nearby_people*12.75))))) //Max 25% chance of silence stacks after succesful not talking roll
+			if(prob(min(25,(nearby_people*12.75)))) //Max 25% chance of silence stacks after succesful not talking roll
 				to_chat(quirker, "<span class='danger'>You retreat into yourself. You <i>really</i> don't feel up to talking.</span>")
 				quirker.silent = max(5, quirker.silent)
 		message = pick("Uh.","Erm.","Um.")
