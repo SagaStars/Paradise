@@ -256,7 +256,7 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-obj/machinery/hispaniabox/boombox
+/obj/machinery/hispaniabox/boombox
 	name = "boombox"
 	desc = "For REAL Workout."
 	icon_state = "boombox"
