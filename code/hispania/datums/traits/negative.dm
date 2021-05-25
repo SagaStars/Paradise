@@ -36,7 +36,7 @@
 	var/dumb_thing = TRUE
 
 /datum/quirk/social_anxiety/add()
-	RegisterSignal(quirk_holder, COMSIG_MOB_EYECONTACT, .proc/eye_contact)
+	RegisterSignal(quirk_holder, COMSIG_MOB_EYECONTACT, .proc/contacto_visual)
 	RegisterSignal(quirk_holder, COMSIG_MOB_SAY, .proc/handle_speech)
 
 /datum/quirk/social_anxiety/remove()
@@ -98,16 +98,16 @@
 	else
 		quirker.messagereal = message
 
-/datum/quirk/social_anxiety/proc/eye_contact(datum/source, mob/living/other_mob, triggering_examiner)
+/datum/quirk/social_anxiety/proc/contacto_visual(datum/source, mob/living/catch_mob, triggering_examiner)
 	SIGNAL_HANDLER
 
 	if(prob(75))
 		return
 	var/msg
 	if(triggering_examiner)
-		msg = "You make eye contact with [other_mob], "
+		msg = "You make eye contact with [catch_mob], "
 	else
-		msg = "[other_mob] makes eye contact with you, "
+		msg = "[catch_mob] makes eye contact with you, "
 
 	switch(rand(1,3))
 		if(1)
