@@ -98,7 +98,7 @@
 
 /datum/quirk/jackichanlol
 	name = "Resiliente"
-	desc = "Has tenido una vida dificil en la que has tenido que resistir muchas agresiones, tienes una ligera defensa de daños inicial."
+	desc = "Eres muy resiliente, tienes una ligera defensa de ataques."
 	value = 5
 	gain_text = "<span class='danger'>Puedes aguantar de todo.</span>"
 	lose_text = "<span class='notice'>Te sientes menos resiliente.</span>"
@@ -108,10 +108,10 @@
 
 /datum/quirk/chadpunches
 	name = "Robusto"
-	desc = "Has practicado un poco de combate mano a mano, nunca fallas tus golpes y puedes dar unos golpes excepcionales."
+	desc = "Tienes experiencia de combate, nunca fallas tus golpes y puedes dar unos golpes excepcionales."
 	value = 4
 	gain_text = "<span class='danger'>Punch-Out!</span>"
-	lose_text = "<span class='notice'>Te sientes oxidado con tu entrenamiento.</span>"
+	lose_text = "<span class='notice'>Te sientes oxidado de tu entrenamiento.</span>"
 
 /datum/quirk/chadpunches/add()
 	quirk_holder.dna.species.punchdamagelow += 1 //Base es 0 y queda en 1 esto implica que no puedes fallar un puñetazo
