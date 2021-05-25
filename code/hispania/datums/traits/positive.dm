@@ -41,3 +41,78 @@
 	mob_trait = TRAIT_AMEN
 	gain_text = "<span class='notice'>Dioses vengan a mi.</span>"
 	lose_text = "<span class='danger'>Perdistes tu confianza con los dioses.</span>"
+
+/datum/quirk/hudmedimplant
+	name = "Implante Medhud"
+	desc = "Empiezas con un implante de MedHud."
+	value = 5
+	gain_text = "<span class='notice'>Ves unas barras flotando en seres vivos.</span>"
+
+/datum/quirk/hudmedimplant/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/obj/item/organ/internal/cyberimp/eyes/hud/medical/implant = new
+	implant.insert(H)
+
+/datum/quirk/nutriimplant
+	name = "Implante Nutriment"
+	desc = "Empiezas con un implante de Nutriment."
+	value = 5
+	gain_text = "<span class='notice'>Ya no te necesito, chef.</span>"
+
+/datum/quirk/nutriimplant/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/obj/item/organ/internal/cyberimp/chest/nutriment/implant = new
+	implant.insert(H)
+
+/datum/quirk/huddiagimplant
+	name = "Implante DiagnosticHUD"
+	desc = "Empiezas con un implante de DiagnosticHUD."
+	value = 1
+	gain_text = "<span class='notice'>Ves unas barras flotantes en seres sinteticos.</span>"
+
+/datum/quirk/huddiagimplant/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/obj/item/organ/internal/cyberimp/eyes/hud/diagnostic/implant = new
+	implant.insert(H)
+
+/datum/quirk/mesonimplant
+	name = "Implante Meson"
+	desc = "Empiezas con un implante de meson."
+	value = 2
+	gain_text = "<span class='notice'>Lo puedes ver todo.</span>"
+
+/datum/quirk/mesonimplant/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/obj/item/organ/internal/eyes/cybernetic/meson/implant = new
+	implant.insert(H)
+
+/datum/quirk/chadasfuck
+	name = "Verdadera Robustez"
+	desc = "Has hecho tanto ejercicio que te sientes invencible, tienes mas vida de lo usual."
+	value = 6
+	gain_text = "<span class='danger'>Un extintor es juego de nenes.</span>"
+	lose_text = "<span class='notice'>No deberias jugartela mucho, siendo tan debil.</span>"
+
+/datum/quirk/chadasfuck/add()
+	quirk_holder.dna.species.total_health += 25
+
+/datum/quirk/jackichanlol
+	name = "Resiliente"
+	desc = "Has tenido una vida dificil en la que has tenido que resistir muchas agresiones, tienes una ligera defensa de daños inicial."
+	value = 5
+	gain_text = "<span class='danger'>Puedes aguantar de todo.</span>"
+	lose_text = "<span class='notice'>Te sientes menos resiliente.</span>"
+
+/datum/quirk/jackichanlol/add()
+	quirk_holder.dna.species.armor += 3
+
+/datum/quirk/chadpunches
+	name = "Robusto"
+	desc = "Has practicado un poco de combate mano a mano, nunca fallas tus golpes y puedes dar unos golpes excepcionales."
+	value = 4
+	gain_text = "<span class='danger'>Punch-Out!</span>"
+	lose_text = "<span class='notice'>Te sientes oxidado con tu entrenamiento.</span>"
+
+/datum/quirk/chadpunches/add()
+	quirk_holder.dna.species.punchdamagelow += 1 //Base es 0 y queda en 1 esto implica que no puedes fallar un puñetazo
+	quirk_holder.dna.species.punchdamagehigh += 1 //Base es 9 y queda en 10

@@ -113,7 +113,8 @@
 					/obj/item/storage/belt/fannypack/red = 30,
 					/obj/item/clothing/suit/mantle = 200,
 					/obj/item/clothing/suit/mantle/old = 200,
-					/obj/item/clothing/suit/mantle/regal = 200)
+					/obj/item/clothing/suit/mantle/regal = 200,
+					/obj/item/clothing/suit/jacket/motojacket = 450)
 
 //este vending es gratis en paradise
 /obj/machinery/vending/artvend
@@ -134,6 +135,12 @@
 
 //este vending es gratis en paradise
 /obj/machinery/vending/autodrobe
+
+	hispa_products = list(/obj/item/clothing/mask/thief = 4,
+					/obj/item/clothing/mask/thief/wolf = 4,
+					/obj/item/clothing/mask/thief/hoxton = 4,
+					/obj/item/clothing/mask/thief/chains = 4)
+
 	hispa_prices = list(/obj/item/clothing/suit/chickensuit = 150,
 					/obj/item/clothing/head/chicken = 150,
 					/obj/item/clothing/under/gladiator = 100,
@@ -204,6 +211,10 @@
 					/obj/item/clothing/mask/face/fox = 90,
 					/obj/item/clothing/mask/face/tribal = 90,
 					/obj/item/clothing/mask/face/rat = 90,
+					/obj/item/clothing/mask/thief = 100,
+					/obj/item/clothing/mask/thief/wolf = 100,
+					/obj/item/clothing/mask/thief/hoxton = 100,
+					/obj/item/clothing/mask/thief/chains = 100,
 					/obj/item/clothing/suit/apron/overalls = 50,
 					/obj/item/clothing/head/rabbitears = 100,
 					/obj/item/clothing/head/sombrero = 100,
@@ -244,7 +255,8 @@
 					/obj/item/clothing/under/redhawaiianshirt = 52,
 					/obj/item/clothing/under/pinkhawaiianshirt = 52,
 					/obj/item/clothing/under/bluehawaiianshirt = 52,
-					/obj/item/clothing/under/orangehawaiianshirt = 52)
+					/obj/item/clothing/under/orangehawaiianshirt = 52,
+					/obj/item/clothing/under/tourist_suit = 50)
 
 //este vending es gratis en paradise
 /obj/machinery/vending/hatdispenser
@@ -303,7 +315,8 @@
 					/obj/item/clothing/shoes/purple = 50,
 					/obj/item/clothing/shoes/red = 100,
 					/obj/item/clothing/shoes/white = 100,
-					/obj/item/clothing/shoes/sandal = 15)
+					/obj/item/clothing/shoes/sandal = 15,
+					/obj/item/clothing/shoes/jackboots = 350)
 	hispa_premium = list(/obj/item/clothing/shoes/swagshoes = 1)
 
 /obj/machinery/vending/cola

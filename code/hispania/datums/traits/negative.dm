@@ -1,7 +1,7 @@
 /datum/quirk/nonviolent
 	name = "Pacifista"
 	desc = "La violencia te da asco. Nunca le harias dano a nadie."
-	value = -2
+	value = -4
 	mob_trait = TRAIT_PACIFISM
 	gain_text = "<span class='danger'>Sientes un gran sentimiento de repulsion a la violencia.</span>"
 	lose_text = "<span class='notice'>VIOLENCIA.</span>"
@@ -122,3 +122,80 @@
 
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/to_chat, quirk_holder, "<span class='userdanger'>[msg]</span>"), 3) // so the examine signal has time to fire and this will print after
 	return COMSIG_BLOCK_EYECONTACT
+
+/datum/quirk/diacaluroso
+	name = "Intolerancia al calor"
+	desc = "No aguantas el calor. Los lugares calidos son mortales."
+	value = -1
+	gain_text = "<span class='danger'>No me gusta el calor.</span>"
+	lose_text = "<span class='notice'>Ya no te disgustan las playas.</span>"
+	medical_record_text = "Paciente con intolerancia al calor."
+
+/datum/quirk/diacaluroso/add()
+	quirk_holder.dna.species.heatmod += 1
+
+/datum/quirk/diafrio
+	name = "Intolerancia al frio"
+	desc = "No aguantas el frio. Los lugares frios son mortales."
+	value = -1
+	gain_text = "<span class='danger'>No me gusta el frio.</span>"
+	lose_text = "<span class='notice'>Subirias una alta montaña sin problemas.</span>"
+	medical_record_text = "Paciente con intolerancia al frio."
+
+/datum/quirk/diafrio/add()
+	quirk_holder.dna.species.coldmod += 1
+
+/datum/quirk/manco
+	name = "Manco"
+	desc = "Por razones perdistes uno de tus brazos hace tiempo."
+	value = -2
+	gain_text = "<span class='danger'>Manco.</span>"
+	lose_text = "<span class='notice'>Well now i can land a hand!.</span>"
+	medical_record_text = "Paciente perdio su brazo, razon desconocida." // Dejemoslos a ellos justificarlo
+
+/datum/quirk/manco/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/picked_hand = pick("l_hand", "r_hand")
+	var/obj/item/organ/external/M = H.get_organ(picked_hand)
+	qdel(M)
+
+/datum/quirk/dedosgordos
+	name = "Dedos Gordos"
+	desc = "Tus dedos son tan gordos que no entran en la mayoria de gatillos ordinarios."
+	value = -2
+	mob_trait = TRAIT_CHUNKYFINGERS
+	gain_text = "<span class='danger'>DEDOS CHONKY!</span>"
+	lose_text = "<span class='notice'>Se te encogieron los dedos.</span>"
+	medical_record_text = "Paciente padece de unos dedos anormalmente gigantescos."
+
+/datum/quirk/debilucho
+	name = "Debilucho"
+	desc = "Sabes que no aguantarias mas golpes que la mayoria de gente."
+	value = -2
+	gain_text = "<span class='danger'>Entre menos problemas nos metamos, mejor.</span>"
+	lose_text = "<span class='notice'>Te sientes fuerte.</span>"
+	medical_record_text = "Paciente padece de una distrofia muscular."
+
+/datum/quirk/debilucho/add()
+	quirk_holder.dna.species.brute_mod += 0.7
+
+/datum/quirk/pielligera
+	name = "Piel fina"
+	desc = "No tienes una piel muy gruesa, es mas facil de quemarte gravemente."
+	value = -2
+	gain_text = "<span class='danger'>Fuego malo.</span>" // jaja frankenstein
+	lose_text = "<span class='notice'>Fuego no tan malo.</span>"
+
+/datum/quirk/pielligera/add()
+	quirk_holder.dna.species.burn_mod += 0.7
+
+/datum/quirk/crazybastard ///The fuck are you doing taking this trait?????
+	name = "DESTINADO A MORIR"
+	desc = "Tu cuerpo es inhumanamente debil, los medicos no entienden como puedes caminar. Decir que tienes huesos de vidrio, sera un subestimamiento."
+	value = -6
+	gain_text = "<span class='danger'>Death is our destination.</span>"
+	lose_text = "<span class='notice'>Sientes que tu cuerpo te acompaña contigo, dejandote tener una vida normal de una vez por todas.</span>"
+
+/datum/quirk/crazybastard/add()
+	quirk_holder.dna.species.burn_mod += 1.8
+	quirk_holder.dna.species.brute_mod += 1.8
