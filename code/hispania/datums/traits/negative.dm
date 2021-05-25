@@ -98,7 +98,7 @@
 	else
 		quirker.messagereal = message
 
-/datum/quirk/social_anxiety/proc/contacto_visual(datum/source, mob/living/catch_mob, triggering_examiner)
+/datum/quirk/social_anxiety/proc/contacto_visual(datum/source, mob/catch_mob, triggering_examiner)
 	SIGNAL_HANDLER
 
 	if(prob(75))
