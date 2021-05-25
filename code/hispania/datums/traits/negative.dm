@@ -106,7 +106,7 @@
 	if(prob(75))
 		return
 	var/msg
-	if(catch_mob == quirk_holder) // ERES TUUUUU
+	if(M == quirk_holder) // ERES TUUUUU
 		msg = "You make eye contact, "
 	else
 		msg = "[M] makes eye contact with you, "
