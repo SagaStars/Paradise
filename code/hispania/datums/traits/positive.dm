@@ -47,6 +47,7 @@
 	desc = "Empiezas con un implante de MedHud."
 	value = 5
 	gain_text = "<span class='notice'>Ves unas barras flotando en seres vivos.</span>"
+	medical_record_text = "Paciente implantado con MedHud."
 
 /datum/quirk/hudmedimplant/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -58,6 +59,7 @@
 	desc = "Empiezas con un implante de Nutriment."
 	value = 5
 	gain_text = "<span class='notice'>Ya no te necesito, chef.</span>"
+	medical_record_text = "Paciente implantado con Nutriment."
 
 /datum/quirk/nutriimplant/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -69,6 +71,7 @@
 	desc = "Empiezas con un implante de DiagnosticHUD."
 	value = 1
 	gain_text = "<span class='notice'>Ves unas barras flotantes en seres sinteticos.</span>"
+	medical_record_text = "Paciente implantado con DiagnosticHUD."
 
 /datum/quirk/huddiagimplant/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -80,6 +83,7 @@
 	desc = "Empiezas con un implante de meson."
 	value = 2
 	gain_text = "<span class='notice'>Lo puedes ver todo.</span>"
+	medical_record_text = "Paciente implantado con Meson."
 
 /datum/quirk/mesonimplant/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -92,6 +96,7 @@
 	value = 6
 	gain_text = "<span class='danger'>Un extintor es juego de nenes.</span>"
 	lose_text = "<span class='notice'>No deberias jugartela mucho, siendo tan debil.</span>"
+	medical_record_text = "Paciente tiene una resistencia destacable."
 
 /datum/quirk/chadasfuck/add()
 	quirk_holder.dna.species.total_health += 25
@@ -102,6 +107,7 @@
 	value = 5
 	gain_text = "<span class='danger'>Puedes aguantar de todo.</span>"
 	lose_text = "<span class='notice'>Te sientes menos resiliente.</span>"
+	medical_record_text = "Paciente tiene una defensa destacable."
 
 /datum/quirk/jackichanlol/add()
 	quirk_holder.dna.species.armor += 3

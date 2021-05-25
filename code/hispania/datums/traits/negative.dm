@@ -183,10 +183,11 @@
 
 /datum/quirk/pielligera
 	name = "Piel fina"
-	desc = "No tienes una piel muy gruesa, es mas facil de quemarte gravemente."
+	desc = "No tienes una piel muy gruesa, es mas facil quemarse gravemente."
 	value = -2
 	gain_text = "<span class='danger'>Fuego malo.</span>" // jaja frankenstein
 	lose_text = "<span class='notice'>Fuego no tan malo.</span>"
+	medical_record_text = "Paciente tiene una piel muy facil de quemar."
 
 /datum/quirk/pielligera/add()
 	quirk_holder.dna.species.burn_mod += 0.7
@@ -197,6 +198,7 @@
 	value = -6
 	gain_text = "<span class='danger'>Death is our destination.</span>"
 	lose_text = "<span class='notice'>Sientes que tu cuerpo te acompaña contigo, dejandote tener una vida normal de una vez por todas.</span>"
+	medical_record_text = "Paciente esta hecho de papel."
 
 /datum/quirk/crazybastard/add()
 	quirk_holder.dna.species.burn_mod += 1.8
