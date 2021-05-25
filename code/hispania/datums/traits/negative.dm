@@ -98,7 +98,7 @@
 	else
 		quirker.messagereal = message
 
-/datum/quirk/social_anxiety/proc/contacto_visual(datum/source, catch_mob, triggering_examiner)
+/datum/quirk/social_anxiety/proc/contacto_visual(datum/source, catch_mob)
 	SIGNAL_HANDLER
 
 	var/mob/living/M = catch_mob
@@ -106,8 +106,8 @@
 	if(prob(75))
 		return
 	var/msg
-	if(triggering_examiner)
-		msg = "You make eye contact with [M], "
+	if(catch_mob == quirk_holder) // ERES TUUUUU
+		msg = "You make eye contact, "
 	else
 		msg = "[M] makes eye contact with you, "
 
