@@ -114,7 +114,7 @@
 		icon = 'icons/hispania/obj/moa.dmi'
 		icon_state = "moa_broken"
 
-/obj/item/reagent_containers/moa/proc/deductcharge(var/chrgdeductamt, mob/user)
+/obj/item/reagent_containers/moa/proc/deductcharge(chrgdeductamt, mob/user)
 	if(cell)
 		if(cell.charge < (hitcost+chrgdeductamt))
 			status = 3
