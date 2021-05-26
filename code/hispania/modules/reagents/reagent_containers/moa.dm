@@ -158,7 +158,7 @@
 /obj/item/reagent_containers/moa/attack(mob/living/M, mob/living/user, def_zone)
 	return
 
-obj/item/reagent_containers/moa/afterattack(atom/target, mob/user, proximity)
+/obj/item/reagent_containers/moa/afterattack(atom/target, mob/user, proximity)
 	if(status == 4)
 		return
 	if(!proximity)
