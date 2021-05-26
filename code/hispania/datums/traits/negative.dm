@@ -36,11 +36,12 @@
 	var/dumb_thing = TRUE
 
 /datum/quirk/social_anxiety/add()
-	RegisterSignal(quirk_holder, COMSIG_MOB_EYECONTACT, .proc/contacto_visual)
+	//RegisterSignal(quirk_holder, COMSIG_MOB_EYECONTACT, .proc/contacto_visual)
 	RegisterSignal(quirk_holder, COMSIG_MOB_SAY, .proc/handle_speech)
 
 /datum/quirk/social_anxiety/remove()
-	UnregisterSignal(quirk_holder, list(COMSIG_MOB_EYECONTACT, COMSIG_MOB_EXAMINATE, COMSIG_MOB_SAY))
+	//UnregisterSignal(quirk_holder, list(COMSIG_MOB_EYECONTACT, COMSIG_MOB_SAY))
+	UnregisterSignal(quirk_holder, COMSIG_MOB_SAY)
 
 /datum/quirk/social_anxiety/proc/handle_speech(datum/source, mensaje)
 	SIGNAL_HANDLER
@@ -98,7 +99,7 @@
 	else
 		quirker.messagereal = message
 
-/datum/quirk/social_anxiety/proc/contacto_visual(datum/source, catch_mob)
+/*/datum/quirk/social_anxiety/proc/contacto_visual(datum/source, catch_mob)
 	SIGNAL_HANDLER
 
 	var/mob/living/M = catch_mob
@@ -124,7 +125,7 @@
 
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/to_chat, quirk_holder, "<span class='userdanger'>[msg]</span>"), 3) // so the examine signal has time to fire and this will print after
 	return COMSIG_BLOCK_EYECONTACT
-
+*/
 /datum/quirk/diacaluroso
 	name = "Intolerancia al calor"
 	desc = "No aguantas el calor. Los lugares calidos son mortales."
