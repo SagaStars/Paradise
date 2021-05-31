@@ -23,9 +23,12 @@
 	can_synth = FALSE
 	taste_description = "a mint leaf"
 
-/datum/reagent/medicine/moa_complement/on_mob_life(mob/living/M)
+/datum/reagent/medicine/moa_complement/on_mob_life(mob/living/carbon/M)
 	var/update_flags = STATUS_UPDATE_NONE
-	update_flags |= M.adjustOxyLoss(-4, FALSE)
-	M.AdjustLoseBreath(-4)
-	M.SetSlowed(1)
-	return ..() | update_flags
+	M.SetSlowed(2)
+	if(M.dna.species.breathid == "o2")
+		update_flags |= M.adjustOxyLoss(-4, FALSE)
+		M.AdjustLoseBreath(-4)
+	else
+		update_flags |= M.adjustOxyLoss(4, FALSE) // MEDBAY FAIL
+	return ..()

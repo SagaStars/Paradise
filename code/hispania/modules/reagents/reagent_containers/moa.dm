@@ -43,7 +43,7 @@
 	else
 		if(reagents.total_volume && status == 1) // Injecting
 			soundcycle++
-			if(soundcycle == 3)
+			if(soundcycle == 4)
 				playsound(loc, "sound/hispania/machines/moa.ogg", 75, 1, 1)
 				soundcycle = 0
 			var/fraction = min(amount_per_transfer_from_this/reagents.total_volume, 1) 	//The amount of reagents we'll transfer to the person
@@ -167,7 +167,7 @@
 		return
 
 	if(isliving(target))
-		var/mob/living/L = target
+		var/mob/living/carbon/L = target
 		if(injection_target) // Removing the needle
 			if(L != injection_target)
 				to_chat(user, "<span class='notice'>[src] is already inserted into [injection_target]'s neck!")
@@ -179,7 +179,7 @@
 					return
 			L.visible_message("<span class='danger'>[user] removes [src]'s needle from [L]'s neck!</span>", \
 								"<span class='userdanger'>[user] removes [src]'s needle from [L]'s neck!</span>")
-			L.status_flags &= ~MOAED
+			L.status_flags &= ~MOAED // Sin condicional para evitar exploits
 			L.overlays -= mask
 			end_processing()
 		else // Inserting the needle
@@ -195,6 +195,7 @@
 					return
 			L.visible_message("<span class='danger'>[user] inserts [src]'s needle mask into [L]'s neck!</span>", \
 									"<span class='userdanger'>[user] inserts [src]'s needle mask into [L]'s neck!</span>")
-			L.status_flags |= MOAED
+			if(L.dna.species.breathid == "o2")
+				L.status_flags |= MOAED
 			L.overlays += mask
 			begin_processing(L)
