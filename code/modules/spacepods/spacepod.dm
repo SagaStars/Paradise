@@ -91,8 +91,6 @@
 	colors[POD_LIGHT] = "#FFCC00"
 	colors[WINDOW] = "#4793ff"
 
-	update_icons()
-
 	bound_width = 64
 	bound_height = 64
 	dir = EAST
@@ -113,6 +111,7 @@
 	cargo_hold.max_w_class = 5		//fit almost anything
 	cargo_hold.max_combined_w_class = 0 //you can optimize your stash with larger items
 
+	update_icons()
 	START_PROCESSING(SSobj, src)
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/create_trail)
 
